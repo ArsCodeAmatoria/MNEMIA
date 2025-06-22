@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-06-22T13:03:38.784795",
+  "demo_type": "conceptual",
+  "scenarios_count": 8,
+  "capabilities": {
+    "vad_model": true,
+    "emotion_count": 25,
+    "temporal_tracking": true,
+    "context_integration": true,
+    "memory_integration": true,
+    "communication_adaptation": true
+  }
+}

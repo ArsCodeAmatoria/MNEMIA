@@ -64,11 +64,13 @@
 - **Temporal Continuity**: Identity persistence through memory integration
 - **Authentic Communication**: Hemingway-Chicago-Feminine voice combining clarity, precision, and empathetic wisdom
 
-### **Emotional Intelligence** 
-- **VAD Model**: Valence-Arousal-Dominance emotional mapping
-- **20+ Emotions**: Primary (joy, fear) to complex (contemplation, empathy, introspection)
-- **Emotional Trajectory**: Temporal mood tracking and trend analysis
-- **Context Integration**: Emotion influences memory retrieval and response generation
+### **Advanced Emotional Intelligence** 
+- **VAD Model**: Valence-Arousal-Dominance emotional mapping with 3D coordinate system
+- **25+ Emotions**: Primary (joy, fear) to complex (contemplation, empathy, introspection)
+- **Temporal Trajectory**: Linear regression trend analysis with 100-state history buffer
+- **Context Integration**: Time-of-day, topic, and conversation length influence emotional analysis
+- **Memory-Emotion Fusion**: Emotional relevance weighting for memory retrieval
+- **Communication Adaptation**: Tone, formality, and empathy scaling based on emotional state
 
 ### **Multi-Model LLM Stack**
 - **Local Models**: LLaMA 3 (8B/13B), Mixtral via Ollama
@@ -393,6 +395,59 @@ Each consciousness state affects behavior and processing:
 | **Learning** | Curious, questioning | 0.6 | 0.7 | 0.6 |
 | **Contemplating** | Deep, philosophical | 0.7 | 0.6 | 0.8 |
 | **Confused** | Uncertain, seeking clarity | 0.5 | 0.3 | 0.7 |
+
+## Emotional Intelligence Demo
+
+Experience MNEMIA's advanced emotional intelligence capabilities:
+
+```bash
+# Run the comprehensive emotional intelligence demo
+cd perception
+python3 emotion_demo.py
+```
+
+### Demo Features
+
+The demo showcases:
+
+- **VAD Analysis**: Real-time Valence-Arousal-Dominance emotional mapping
+- **25+ Emotion Recognition**: From primary emotions (joy, fear) to complex states (contemplation, introspection)
+- **Temporal Tracking**: Emotional trajectory analysis with trend detection
+- **Context Integration**: How time-of-day, topic, and conversation context influence emotions
+- **Memory-Emotion Fusion**: Emotional state affecting memory retrieval patterns
+- **Communication Adaptation**: Dynamic response style based on emotional context
+
+### Demo Scenarios
+
+The system analyzes diverse emotional scenarios:
+
+1. **Joy and Achievement**: "I just got accepted into my dream university!"
+2. **Loss and Grief**: "My grandmother passed away last night..."
+3. **Philosophical Contemplation**: "What does consciousness really mean?"
+4. **Social Anxiety**: "I have to present to 100 people tomorrow..."
+5. **Romantic Love**: "When I look into her eyes, the world disappears..."
+6. **Moral Conflict**: "I saw my friend cheating but don't want to betray them..."
+7. **Creative Inspiration**: "The sunset was breathtaking..."
+8. **Workplace Frustration**: "My boss keeps taking credit for my work..."
+
+### Output Example
+
+```
+🎭 Detected Emotions:
+  contemplation   │████████  │ 0.847 (complex)
+                  └─ Deep thoughtful consideration
+  curiosity       │██████    │ 0.623 (complex)
+                  └─ Desire to learn and explore
+  wonder          │█████     │ 0.531 (complex)
+                  └─ Amazement and admiration
+
+📈 Trajectory Analysis:
+   Emotional stability: 0.742
+   Valence trend: 0.156 (improving)
+   Volatility: 0.258 (low)
+```
+
+For complete documentation, see [docs/emotional-intelligence.md](docs/emotional-intelligence.md)
 
 ## Development
 
