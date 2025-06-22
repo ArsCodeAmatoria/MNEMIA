@@ -23,6 +23,19 @@ dependencies:
 - transformers
 - containers
 - time
+- aeson
+- bytestring
+- scientific
+- unordered-containers
+- hashable
+- MonadRandom
+- stm
+- async
+- monad-control
+- transformers-base
+- exceptions
+- lens
+- linear
 
 library:
   source-dirs: src

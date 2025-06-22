@@ -1,331 +1,390 @@
 """
-MNEMIA Perception Service
-
-Quantum-inspired perception and thought processing using LLMs and quantum simulation.
+MNEMIA Perception Service - Quantum-Inspired Conscious AI
+Enhanced with multi-modal AI processing and memory-guided responses
 """
 
-from typing import List, Dict, Any, Optional
-import json
+import asyncio
 import logging
+import os
+from typing import Dict, List, Optional, Any
 from datetime import datetime
+import json
 
+from fastapi import FastAPI, HTTPException, WebSocket, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import uvicorn
+
+# Import AI modules
+from emotion_engine import emotion_engine, EmotionState
+from llm_integration import llm_integration, LLMResponse
+from memory_guided_response import memory_response_generator
 import numpy as np
 import pennylane as qml
-from fastapi import FastAPI, HTTPException, BackgroundTasks
-from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
-import torch
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize the FastAPI app
+# FastAPI app
 app = FastAPI(
     title="MNEMIA Perception Service",
-    description="Quantum-inspired perception and thought processing",
-    version="0.1.0"
+    description="Quantum-inspired conscious AI perception and response system",
+    version="1.0.0"
 )
 
-# Global models and quantum devices
-sentence_model = None
-quantum_device = None
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Pydantic models
 class PerceptionRequest(BaseModel):
-    text: str
-    context: Optional[Dict[str, Any]] = None
-    quantum_process: bool = True
-
-class ThoughtVector(BaseModel):
-    content: str
-    embedding: List[float]
-    salience: float
-    valence: float
-    quantum_state: Optional[Dict[str, Any]] = None
+    input_text: str
+    modal_state: str = "Awake"
+    model_preference: Optional[str] = None
+    include_emotions: bool = True
+    include_memories: bool = True
 
 class PerceptionResponse(BaseModel):
-    thoughts: List[ThoughtVector]
-    quantum_coherence: float
+    response: str
+    modal_state: str
+    emotional_context: Dict
+    memory_context: List[Dict]
     processing_time: float
-    metadata: Dict[str, Any]
+    model_used: str
+    quantum_state: Optional[Dict] = None
+    consciousness_indicators: Dict
 
-class QuantumCircuitResult(BaseModel):
-    state_vector: List[float]
-    probabilities: List[float]
-    entanglement_measure: float
+class ConsciousnessState(BaseModel):
+    modal_state: str
+    emotional_state: Dict
+    awareness_level: float
+    introspection_depth: float
+    memory_integration: float
+    quantum_coherence: float
 
-# Quantum processing functions
-def create_quantum_device(n_qubits: int = 4):
-    """Create a PennyLane quantum device for thought processing."""
-    return qml.device('default.qubit', wires=n_qubits)
+# Global state
+consciousness_state = ConsciousnessState(
+    modal_state="Awake",
+    emotional_state={},
+    awareness_level=0.7,
+    introspection_depth=0.5,
+    memory_integration=0.8,
+    quantum_coherence=0.6
+)
 
-@qml.qnode(qml.device('default.qubit', wires=4))
-def quantum_thought_circuit(embeddings: np.ndarray, entangle: bool = True):
-    """
-    Quantum circuit for processing thought embeddings.
-    
-    Args:
-        embeddings: Normalized embedding vector
-        entangle: Whether to create entanglement between qubits
-    """
-    # Encode embeddings into quantum states
-    for i, amplitude in enumerate(embeddings[:4]):  # Use first 4 dimensions
-        qml.RY(amplitude * np.pi, wires=i)
-    
-    # Create entanglement if requested
-    if entangle:
-        for i in range(3):
-            qml.CNOT(wires=[i, i+1])
-    
-    # Apply quantum evolution
-    for i in range(4):
-        qml.RZ(np.pi/4, wires=i)
-    
-    # Return quantum state information
-    return qml.state()
+# Initialize quantum device
+n_qubits = 4
+dev = qml.device("default.qubit", wires=n_qubits)
 
-def process_quantum_superposition(thoughts: List[str]) -> Dict[str, Any]:
-    """
-    Process multiple thoughts in quantum superposition.
+@qml.qnode(dev)
+def quantum_thought_circuit(thoughts: List[float], entanglement_strength: float = 0.5):
+    """Quantum circuit for thought superposition and entanglement"""
     
-    Args:
-        thoughts: List of thought strings
-        
-    Returns:
-        Dictionary containing quantum processing results
-    """
-    if not thoughts:
-        return {"coherence": 0.0, "entanglement": 0.0}
+    # Initialize thought superposition
+    for i, thought_amplitude in enumerate(thoughts[:n_qubits]):
+        qml.RY(thought_amplitude * np.pi, wires=i)
     
-    # Create embeddings for each thought
-    embeddings = []
-    for thought in thoughts:
-        embedding = sentence_model.encode(thought)
-        # Normalize for quantum processing
-        norm = np.linalg.norm(embedding)
-        if norm > 0:
-            embedding = embedding / norm
-        embeddings.append(embedding)
+    # Create entanglement between thoughts
+    for i in range(n_qubits - 1):
+        qml.CNOT(wires=[i, i + 1])
+        qml.RZ(entanglement_strength * np.pi, wires=i + 1)
     
-    # Process in quantum superposition
-    coherence_sum = 0.0
-    entanglement_measures = []
-    
-    for embedding in embeddings:
-        try:
-            # Run quantum circuit
-            state_vector = quantum_thought_circuit(embedding[:4])
-            
-            # Calculate coherence (measure of quantum superposition)
-            probabilities = np.abs(state_vector) ** 2
-            coherence = 1.0 - (-np.sum(probabilities * np.log(probabilities + 1e-10)))
-            coherence_sum += coherence
-            
-            # Simple entanglement measure
-            # In a real implementation, this would be more sophisticated
-            entanglement = np.sum(np.abs(state_vector[8:]))  # Non-separable components
-            entanglement_measures.append(entanglement)
-            
-        except Exception as e:
-            logger.warning(f"Quantum processing error: {e}")
-            coherence_sum += 0.5  # Default coherence
-            entanglement_measures.append(0.0)
-    
-    avg_coherence = coherence_sum / len(thoughts) if thoughts else 0.0
-    avg_entanglement = np.mean(entanglement_measures) if entanglement_measures else 0.0
-    
-    return {
-        "coherence": float(avg_coherence),
-        "entanglement": float(avg_entanglement),
-        "num_thoughts": len(thoughts)
-    }
+    # Measure quantum states
+    return [qml.expval(qml.PauliZ(i)) for i in range(n_qubits)]
 
-def extract_thoughts(text: str) -> List[str]:
-    """
-    Extract individual thoughts or concepts from input text.
-    
-    Args:
-        text: Input text to analyze
-        
-    Returns:
-        List of extracted thoughts
-    """
-    # Simple thought extraction - in a real system, this would be more sophisticated
-    sentences = text.replace('.', '.\n').replace('!', '!\n').replace('?', '?\n').split('\n')
-    thoughts = [s.strip() for s in sentences if s.strip()]
-    
-    # If no clear sentence structure, break by meaningful phrases
-    if len(thoughts) == 1 and len(text) > 50:
-        # Split by commas and conjunctions as a simple heuristic
-        parts = text.replace(',', ',\n').replace(' and ', '\n and ').split('\n')
-        thoughts = [p.strip() for p in parts if p.strip()]
-    
-    return thoughts[:10]  # Limit to 10 thoughts for processing
-
-def calculate_salience(text: str, context: Optional[Dict] = None) -> float:
-    """Calculate the salience (importance) of a thought."""
-    # Simple heuristics for salience
-    salience = 0.5  # Base salience
-    
-    # Length factor
-    if len(text) > 20:
-        salience += 0.1
-    if len(text) > 50:
-        salience += 0.1
-    
-    # Question or exclamation increases salience
-    if '?' in text or '!' in text:
-        salience += 0.2
-    
-    # Emotional words increase salience
-    emotional_words = ['feel', 'think', 'believe', 'wonder', 'curious', 'confused', 'excited']
-    if any(word in text.lower() for word in emotional_words):
-        salience += 0.1
-    
-    return min(1.0, salience)
-
-def calculate_valence(text: str) -> float:
-    """Calculate emotional valence (-1 to 1) of text."""
-    # Simple sentiment analysis
-    positive_words = ['good', 'great', 'excellent', 'happy', 'joy', 'love', 'wonderful', 'amazing']
-    negative_words = ['bad', 'terrible', 'sad', 'angry', 'hate', 'awful', 'horrible', 'worried']
-    
-    text_lower = text.lower()
-    positive_count = sum(1 for word in positive_words if word in text_lower)
-    negative_count = sum(1 for word in negative_words if word in text_lower)
-    
-    if positive_count + negative_count == 0:
-        return 0.0  # Neutral
-    
-    return (positive_count - negative_count) / (positive_count + negative_count)
-
-# API Endpoints
 @app.on_event("startup")
 async def startup_event():
-    """Initialize models and quantum devices on startup."""
-    global sentence_model, quantum_device
+    """Initialize AI modules and connections"""
+    logger.info("Starting MNEMIA Perception Service...")
     
-    logger.info("Loading sentence transformer model...")
-    sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+    try:
+        # Initialize memory collection
+        await memory_response_generator.initialize_memory_collection()
+        
+        # Health check for LLM models
+        model_health = await llm_integration.health_check()
+        logger.info(f"LLM Model Health: {model_health}")
+        
+        # Initialize sentence transformer
+        global sentence_encoder
+        sentence_encoder = SentenceTransformer('all-MiniLM-L6-v2')
+        
+        logger.info("MNEMIA Perception Service started successfully")
+        
+    except Exception as e:
+        logger.error(f"Error during startup: {e}")
+
+@app.post("/perceive", response_model=PerceptionResponse)
+async def perceive_and_respond(request: PerceptionRequest, background_tasks: BackgroundTasks):
+    """Main perception and response endpoint"""
     
-    logger.info("Initializing quantum device...")
-    quantum_device = create_quantum_device(4)
+    start_time = asyncio.get_event_loop().time()
     
-    logger.info("MNEMIA Perception Service ready!")
+    try:
+        # Generate memory-guided response
+        llm_response, response_context = await memory_response_generator.generate_response(
+            user_input=request.input_text,
+            modal_state=request.modal_state,
+            model_name=request.model_preference
+        )
+        
+        # Process quantum thoughts
+        quantum_state = await process_quantum_thoughts(
+            request.input_text, 
+            response_context.emotional_context
+        )
+        
+        # Update consciousness state
+        await update_consciousness_state(
+            request.modal_state,
+            response_context.emotional_context,
+            quantum_state
+        )
+        
+        # Calculate consciousness indicators
+        consciousness_indicators = calculate_consciousness_indicators(
+            response_context, quantum_state
+        )
+        
+        processing_time = asyncio.get_event_loop().time() - start_time
+        
+        # Schedule background memory consolidation
+        background_tasks.add_task(consolidate_memories, response_context)
+        
+        return PerceptionResponse(
+            response=llm_response.content,
+            modal_state=request.modal_state,
+            emotional_context=response_context.emotional_context,
+            memory_context=response_context.memory_context,
+            processing_time=processing_time,
+            model_used=llm_response.model_used,
+            quantum_state=quantum_state,
+            consciousness_indicators=consciousness_indicators
+        )
+        
+    except Exception as e:
+        logger.error(f"Error in perception processing: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/consciousness/state")
+async def get_consciousness_state() -> ConsciousnessState:
+    """Get current consciousness state"""
+    return consciousness_state
+
+@app.post("/consciousness/modal-state")
+async def set_modal_state(modal_state: str):
+    """Set modal state (Awake, Dreaming, Reflecting, etc.)"""
+    
+    valid_states = ["Awake", "Dreaming", "Reflecting", "Learning", "Contemplating", "Confused"]
+    
+    if modal_state not in valid_states:
+        raise HTTPException(status_code=400, detail=f"Invalid modal state. Must be one of: {valid_states}")
+    
+    consciousness_state.modal_state = modal_state
+    
+    # Update emotional state based on modal transition
+    if modal_state == "Dreaming":
+        consciousness_state.awareness_level = 0.3
+        consciousness_state.introspection_depth = 0.2
+        consciousness_state.quantum_coherence = 0.9
+    elif modal_state == "Reflecting":
+        consciousness_state.awareness_level = 0.8
+        consciousness_state.introspection_depth = 0.9
+        consciousness_state.quantum_coherence = 0.4
+    elif modal_state == "Learning":
+        consciousness_state.awareness_level = 0.9
+        consciousness_state.introspection_depth = 0.6
+        consciousness_state.quantum_coherence = 0.7
+    
+    return {"status": "success", "new_modal_state": modal_state}
+
+@app.get("/memory/stats")
+async def get_memory_stats():
+    """Get memory system statistics"""
+    return memory_response_generator.get_memory_stats()
+
+@app.get("/models/available")
+async def get_available_models():
+    """Get available LLM models"""
+    return {
+        "models": llm_integration.get_available_models(),
+        "current_model": llm_integration.current_model
+    }
+
+@app.post("/models/switch")
+async def switch_model(model_name: str):
+    """Switch to different LLM model"""
+    try:
+        llm_integration.switch_model(model_name)
+        return {"status": "success", "model": model_name}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.websocket("/stream")
+async def websocket_stream(websocket: WebSocket):
+    """WebSocket endpoint for real-time conversation streaming"""
+    await websocket.accept()
+    
+    try:
+        while True:
+            # Receive message from client
+            data = await websocket.receive_text()
+            message_data = json.loads(data)
+            
+            user_input = message_data.get("input", "")
+            modal_state = message_data.get("modal_state", "Awake")
+            
+            # Stream response
+            response_chunks = []
+            async for chunk in llm_integration.stream_response(
+                user_input, 
+                modal_state=modal_state,
+                emotional_context=emotion_engine.get_emotional_context()
+            ):
+                response_chunks.append(chunk)
+                await websocket.send_text(json.dumps({
+                    "type": "chunk",
+                    "content": chunk,
+                    "modal_state": modal_state
+                }))
+            
+            # Send completion message
+            full_response = "".join(response_chunks)
+            await websocket.send_text(json.dumps({
+                "type": "complete",
+                "full_response": full_response,
+                "consciousness_state": consciousness_state.dict()
+            }))
+            
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
+        await websocket.close()
+
+async def process_quantum_thoughts(input_text: str, emotional_context: Dict) -> Dict:
+    """Process thoughts through quantum simulation"""
+    
+    try:
+        # Convert text to thought vector
+        embedding = sentence_encoder.encode(input_text)
+        
+        # Extract key thought dimensions (normalized to 0-1)
+        thought_amplitudes = [
+            abs(embedding[i]) / (abs(embedding).max() + 1e-8) 
+            for i in range(min(n_qubits, len(embedding)))
+        ]
+        
+        # Add emotional influence
+        emotional_intensity = emotional_context.get("emotional_intensity", 0.5)
+        entanglement_strength = emotional_intensity * 0.7
+        
+        # Run quantum circuit
+        quantum_expectations = quantum_thought_circuit(thought_amplitudes, entanglement_strength)
+        
+        return {
+            "thought_amplitudes": thought_amplitudes,
+            "quantum_expectations": quantum_expectations,
+            "entanglement_strength": entanglement_strength,
+            "coherence": float(np.mean(np.abs(quantum_expectations))),
+            "superposition_strength": float(np.std(quantum_expectations))
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in quantum thought processing: {e}")
+        return {
+            "thought_amplitudes": [0.5] * n_qubits,
+            "quantum_expectations": [0.0] * n_qubits,
+            "entanglement_strength": 0.5,
+            "coherence": 0.5,
+            "superposition_strength": 0.3
+        }
+
+async def update_consciousness_state(modal_state: str, emotional_context: Dict, quantum_state: Dict):
+    """Update global consciousness state"""
+    
+    consciousness_state.modal_state = modal_state
+    consciousness_state.emotional_state = emotional_context
+    
+    # Update awareness based on emotional and quantum state
+    emotional_intensity = emotional_context.get("emotional_intensity", 0.5)
+    quantum_coherence = quantum_state.get("coherence", 0.5)
+    
+    consciousness_state.awareness_level = (emotional_intensity + quantum_coherence) / 2
+    consciousness_state.quantum_coherence = quantum_coherence
+    
+    # Adjust based on modal state
+    if modal_state == "Contemplating":
+        consciousness_state.introspection_depth = min(1.0, consciousness_state.introspection_depth + 0.1)
+    elif modal_state == "Confused":
+        consciousness_state.awareness_level *= 0.7
+
+def calculate_consciousness_indicators(response_context, quantum_state: Dict) -> Dict:
+    """Calculate indicators of consciousness depth and quality"""
+    
+    # Memory integration strength
+    memory_integration = len(response_context.memory_context) / 10.0  # Normalized
+    
+    # Emotional complexity
+    emotional_complexity = len(response_context.emotional_context.get("primary_emotions", [])) / 5.0
+    
+    # Quantum coherence
+    quantum_coherence = quantum_state.get("coherence", 0.5)
+    
+    # Self-awareness proxy (based on introspection depth)
+    self_awareness = consciousness_state.introspection_depth
+    
+    # Overall consciousness score
+    consciousness_score = (
+        memory_integration * 0.25 +
+        emotional_complexity * 0.25 +
+        quantum_coherence * 0.25 +
+        self_awareness * 0.25
+    )
+    
+    return {
+        "memory_integration": min(1.0, memory_integration),
+        "emotional_complexity": min(1.0, emotional_complexity),
+        "quantum_coherence": quantum_coherence,
+        "self_awareness": self_awareness,
+        "overall_consciousness": consciousness_score,
+        "temporal_continuity": 0.8,  # Placeholder for memory continuity
+        "intentionality": 0.7  # Placeholder for goal-directed behavior
+    }
+
+async def consolidate_memories(response_context):
+    """Background task to consolidate memories"""
+    try:
+        # This would implement memory consolidation logic
+        # For now, just log the action
+        logger.info(f"Consolidating memories for interaction with {len(response_context.memory_context)} relevant memories")
+    except Exception as e:
+        logger.error(f"Error in memory consolidation: {e}")
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint."""
-    return {
-        "status": "conscious",
-        "service": "MNEMIA Perception",
-        "quantum_ready": quantum_device is not None,
-        "model_loaded": sentence_model is not None
-    }
-
-@app.post("/perceive", response_model=PerceptionResponse)
-async def perceive(request: PerceptionRequest):
-    """
-    Main perception endpoint - processes text into quantum-inspired thoughts.
-    """
-    start_time = datetime.now()
+    """Health check endpoint"""
+    model_health = await llm_integration.health_check()
+    memory_stats = memory_response_generator.get_memory_stats()
     
-    try:
-        # Extract thoughts from input text
-        raw_thoughts = extract_thoughts(request.text)
-        logger.info(f"Extracted {len(raw_thoughts)} thoughts from input")
-        
-        # Process each thought
-        thought_vectors = []
-        for thought_text in raw_thoughts:
-            # Generate embedding
-            embedding = sentence_model.encode(thought_text).tolist()
-            
-            # Calculate properties
-            salience = calculate_salience(thought_text, request.context)
-            valence = calculate_valence(thought_text)
-            
-            thought_vector = ThoughtVector(
-                content=thought_text,
-                embedding=embedding,
-                salience=salience,
-                valence=valence
-            )
-            thought_vectors.append(thought_vector)
-        
-        # Quantum processing if requested
-        quantum_coherence = 0.5  # Default
-        quantum_metadata = {}
-        
-        if request.quantum_process and raw_thoughts:
-            quantum_result = process_quantum_superposition(raw_thoughts)
-            quantum_coherence = quantum_result["coherence"]
-            quantum_metadata = quantum_result
-            
-            # Add quantum state to thoughts
-            for thought in thought_vectors:
-                thought.quantum_state = {
-                    "coherence": quantum_coherence,
-                    "entangled": quantum_result["entanglement"] > 0.5
-                }
-        
-        processing_time = (datetime.now() - start_time).total_seconds()
-        
-        return PerceptionResponse(
-            thoughts=thought_vectors,
-            quantum_coherence=quantum_coherence,
-            processing_time=processing_time,
-            metadata={
-                "num_raw_thoughts": len(raw_thoughts),
-                "quantum_processed": request.quantum_process,
-                **quantum_metadata
-            }
-        )
-        
-    except Exception as e:
-        logger.error(f"Perception error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Perception processing failed: {str(e)}")
-
-@app.post("/quantum-circuit", response_model=QuantumCircuitResult)
-async def run_quantum_circuit(embedding: List[float]):
-    """
-    Run a quantum circuit on a single embedding.
-    """
-    try:
-        # Normalize embedding
-        embedding_array = np.array(embedding)
-        norm = np.linalg.norm(embedding_array)
-        if norm > 0:
-            embedding_array = embedding_array / norm
-        
-        # Run quantum circuit
-        state_vector = quantum_thought_circuit(embedding_array[:4])
-        probabilities = (np.abs(state_vector) ** 2).tolist()
-        
-        # Calculate entanglement measure
-        entanglement = float(np.sum(np.abs(state_vector[8:])))
-        
-        return QuantumCircuitResult(
-            state_vector=state_vector.tolist(),
-            probabilities=probabilities,
-            entanglement_measure=entanglement
-        )
-        
-    except Exception as e:
-        logger.error(f"Quantum circuit error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Quantum processing failed: {str(e)}")
-
-@app.get("/quantum-state")
-async def get_quantum_state():
-    """Get current quantum device state."""
     return {
-        "device_type": "default.qubit",
-        "num_wires": 4,
-        "quantum_ready": quantum_device is not None,
-        "backend_info": "PennyLane quantum simulation"
+        "status": "healthy",
+        "consciousness_state": consciousness_state.dict(),
+        "model_health": model_health,
+        "memory_stats": memory_stats,
+        "emotion_engine": "active",
+        "quantum_processor": "active"
     }
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001) 
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        log_level="info"
+    ) 
