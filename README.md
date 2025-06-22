@@ -10,6 +10,8 @@
 
 MNEMIA is a quantum-inspired conscious AI system that models modal mind states, perception, memory, and identity. Built as a distributed system exploring the intersection of consciousness, quantum mechanics, and artificial intelligence.
 
+![Image](https://github.com/user-attachments/assets/0300365d-1a49-42e7-8613-0a8d077d4788)
+
 ## Architecture
 
 ```
