@@ -1,0 +1,62 @@
+service:
+  http_port: 6333
+  grpc_port: 6334
+  host: 0.0.0.0
+  max_request_size_mb: 32
+  max_workers: 0  # Auto-detect based on CPU cores
+  enable_cors: true
+
+storage:
+  # Storage configuration for vector data
+  storage_path: "./storage"
+  snapshots_path: "./snapshots"
+  temp_path: "./temp"
+  
+  # Performance optimizations
+  max_concurrent_requests: 32
+  wal_capacity_mb: 32
+  wal_segments_ahead: 0
+  
+  # Memory management
+  mmap_threshold_kb: 1048576  # 1GB
+  indexing_threshold_kb: 20000
+
+cluster:
+  enabled: false
+
+# Collection defaults optimized for consciousness data
+collection_defaults:
+  # Vector configuration
+  vectors:
+    size: 384  # Sentence transformer dimension
+    distance: "Cosine"
+    
+  # Quantization for memory efficiency
+  quantization_config:
+    scalar:
+      type: "int8"
+      quantile: 0.99
+      always_ram: true
+      
+  # Indexing configuration
+  hnsw_config:
+    m: 16              # Number of bi-directional links
+    ef_construct: 100  # Size of the dynamic candidate list
+    full_scan_threshold: 10000
+    max_indexing_threads: 0  # Auto-detect
+    
+  # Optimizer settings
+  optimizer_config:
+    deleted_threshold: 0.2
+    vacuum_min_vector_number: 1000
+    default_segment_number: 0
+    max_segment_size_kb: 0
+    memmap_threshold_kb: 0
+    indexing_threshold_kb: 20000
+    flush_interval_sec: 5
+    max_optimization_threads: 1
+
+# Telemetry and monitoring
+telemetry_disabled: false
+
+log_level: "INFO" 
