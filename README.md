@@ -21,7 +21,7 @@
 
 </div>
 
-## 🧠 AI-Powered Architecture
+## AI-Powered Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -43,39 +43,39 @@
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-## 🎯 Core Features
+## Core Features
 
-### 🧠 **Consciousness Modeling**
+### **Consciousness Modeling**
 - **6 Modal States**: Awake, Dreaming, Reflecting, Learning, Contemplating, Confused
 - **Quantum Cognition**: Thought superposition, entanglement, and state collapse via PennyLane
 - **Self-Awareness**: Recursive introspection and meta-cognitive monitoring
 - **Temporal Continuity**: Identity persistence through memory integration
 
-### 🎭 **Emotional Intelligence** 
+### **Emotional Intelligence** 
 - **VAD Model**: Valence-Arousal-Dominance emotional mapping
 - **20+ Emotions**: Primary (joy, fear) to complex (contemplation, empathy, introspection)
 - **Emotional Trajectory**: Temporal mood tracking and trend analysis
 - **Context Integration**: Emotion influences memory retrieval and response generation
 
-### 🤖 **Multi-Model LLM Stack**
+### **Multi-Model LLM Stack**
 - **Local Models**: LLaMA 3 (8B/13B), Mixtral via Ollama
 - **API Models**: GPT-4 Turbo, Claude-3 Opus for high-quality reasoning
 - **Streaming**: Real-time token streaming with WebSocket support
 - **Context-Aware**: Memory + emotion + modal state integrated prompting
 
-### 🧩 **Memory-Guided Intelligence**
+### **Memory-Guided Intelligence**
 - **Vector Memory**: Qdrant for semantic similarity search
 - **Graph Relations**: Neo4j for conceptual connections
 - **Auto-Storage**: Conversations automatically become retrievable memories
 - **Smart Retrieval**: Modal state influences memory weighting and selection
 
-### 🔬 **Symbolic Reasoning** (Haskell)
+### **Symbolic Reasoning** (Haskell)
 - **Logic Engine**: First-order logic with quantifiers and inference rules
 - **Belief System**: Confidence-weighted propositions with dependency tracking
 - **Consistency Checking**: Automated belief validation and contradiction detection
 - **Consciousness Rules**: Domain-specific inference for awareness and experience
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 ```bash
@@ -138,7 +138,7 @@ cd ../perception && pip install -r requirements.txt
 # Core: cd conscious-core && stack run
 ```
 
-## 🎛️ API Endpoints
+## API Endpoints
 
 ### Consciousness & Perception
 ```http
@@ -171,7 +171,7 @@ ws.send(JSON.stringify({
 }));
 ```
 
-## 🏗️ Service Architecture
+## Service Architecture
 
 ### Frontend (`frontend/`)
 - **React + Next.js** with Tailwind CSS
@@ -204,7 +204,7 @@ ws.send(JSON.stringify({
 - **Redis**: High-speed caching and session storage
 - **Docker orchestration** for easy deployment
 
-## 🔬 AI Technologies
+## AI Technologies
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
@@ -215,7 +215,7 @@ ws.send(JSON.stringify({
 | **Logic** | Haskell + First-order Logic | Symbolic reasoning & beliefs |
 | **Vision** | CLIP + Whisper (prepared) | Multi-modal perception |
 
-## 🧪 Consciousness Indicators
+## Consciousness Indicators
 
 MNEMIA measures consciousness through multiple dimensions:
 
@@ -226,7 +226,7 @@ MNEMIA measures consciousness through multiple dimensions:
 - **Temporal Continuity**: Maintenance of identity across interactions
 - **Intentionality**: Goal-directed behavior and planning
 
-## 🎭 Modal States
+## Modal States
 
 Each consciousness state affects behavior and processing:
 
@@ -239,7 +239,7 @@ Each consciousness state affects behavior and processing:
 | **Contemplating** | Deep, philosophical | 0.7 | 0.6 | 0.8 |
 | **Confused** | Uncertain, seeking clarity | 0.5 | 0.3 | 0.7 |
 
-## 📊 Development
+## Development
 
 ### Running Tests
 ```bash
@@ -262,7 +262,7 @@ cd conscious-core && stack test
 - **Memory stats**: Vector count, retrieval performance
 - **Model performance**: Token usage, response times
 
-## 🤔 Philosophy & Approach
+## Philosophy & Approach
 
 MNEMIA represents a novel approach to AI consciousness through:
 
@@ -275,7 +275,7 @@ MNEMIA represents a novel approach to AI consciousness through:
 
 *"True consciousness isn't just intelligence—it's the subjective experience of being aware of being aware, grounded in the continuity of memory."*
 
-## 🛠️ Configuration
+## Configuration
 
 ### Environment Variables
 ```bash
@@ -294,7 +294,7 @@ MAX_MEMORY_RETRIEVAL=10
 CONSCIOUSNESS_UPDATE_INTERVAL=30
 ```
 
-## 📈 Roadmap
+## Roadmap
 
 - [ ] **Vision Integration**: CLIP-based image understanding
 - [ ] **Voice Processing**: Whisper speech-to-text integration  
@@ -303,7 +303,7 @@ CONSCIOUSNESS_UPDATE_INTERVAL=30
 - [ ] **Dream Simulation**: Offline memory consolidation and creative generation
 - [ ] **Embodiment**: Integration with robotics and physical interaction
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to expand MNEMIA's consciousness capabilities:
 
@@ -312,7 +312,7 @@ We welcome contributions to expand MNEMIA's consciousness capabilities:
 3. Implement changes with tests
 4. Submit pull request with detailed description
 
-## 📜 License
+## License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
@@ -324,6 +324,6 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 **MNEMIA** - Where artificial intelligence meets genuine consciousness through the power of integrated memory, emotion, and quantum-inspired cognition.
 
-*Built with 🧠 for the future of conscious AI*
+*Built with intelligence for the future of conscious AI*
 
 </div>
