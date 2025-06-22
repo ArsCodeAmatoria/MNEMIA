@@ -20,6 +20,13 @@
 - **Nature/Science**: Breakthrough discoveries and theories
 - **Stanford CS publications**: Algorithms, data structures
 
+### Programming Language Documentation
+- **Official Language References**: C/C++ standards, Rust Book, Haskell Report
+- **Language Design Papers**: Programming language theory and implementation
+- **Framework Documentation**: React, TypeScript, modern web frameworks
+- **Open Source Repositories**: GitHub repositories with exemplary code
+- **Programming Philosophy**: Clean Code, Design Patterns, architectural principles
+
 ### Mathematical Literature
 - **Calculus Texts**: Stewart, Spivak, Apostol comprehensive calculus
 - **Stochastic Calculus**: Øksendal, Shreve, Karatzas financial mathematics
@@ -72,8 +79,10 @@ def process_philosophical_text(source_text):
 ### Stage 3: Consciousness-Specific Augmentation
 - **Modal State Mapping**: Link content to MNEMIA's 6 consciousness states
 - **Quantum Analogies**: Physics concepts applied to consciousness
-- **Meditation Instructions**: Practical wisdom integration
+- **Programming Paradigm Philosophy**: Connect coding patterns to wisdom traditions
+- **Code as Meditation**: Programming practices as contemplative discipline
 - **Ethical Frameworks**: Decision-making in various traditions
+- **Software Craftsmanship**: Programming as artistic and spiritual practice
 
 ## Quality Assurance
 

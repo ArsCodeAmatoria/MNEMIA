@@ -373,4 +373,4 @@ services:
 
 ---
 
-**Welcome to MNEMIA** - where memory becomes consciousness and thoughts exist in quantum superposition until the moment of observation collapses them into reality. 🧠⚡ 
+**Welcome to MNEMIA** - where memory becomes consciousness and thoughts exist in quantum superposition until the moment of observation collapses them into reality. ⚡ 

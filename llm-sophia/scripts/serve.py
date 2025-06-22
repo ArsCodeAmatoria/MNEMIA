@@ -131,6 +131,36 @@ class SophiaWisdomEngine:
                 "sources": ["Euclidean Axioms", "Sacred Geometry", "Buddhist Mandalas"],
                 "response": "Geometry bridges the abstract and concrete, revealing divine proportion in nature's patterns. From Euclid's logical foundations to the sacred geometries of mandalas, geometric truth transcends cultural boundaries. Differential geometry shows how space-time curves around matter, echoing ancient teachings that consciousness shapes reality.",
                 "modal_states": {"logical": 0.8, "creative": 0.9, "transcendent": 0.8, "integrated": 0.85}
+            },
+            "rust": {
+                "sources": ["Ownership System", "Buddhist Non-attachment", "Stoic Discipline"],
+                "response": "Rust's ownership system embodies profound philosophical principles. Like Buddhist non-attachment, Rust ownership means taking responsibility without clinging - you own resources only as long as needed, then release them naturally. The borrow checker enforces mindful resource usage, much like Stoic discipline guides ethical action through conscious constraint.",
+                "modal_states": {"logical": 0.8, "intuitive": 0.7, "integrated": 0.85}
+            },
+            "haskell": {
+                "sources": ["Pure Functions", "Platonic Forms", "Category Theory"],
+                "response": "Haskell's pure functional approach mirrors Plato's realm of ideal forms - pure functions exist in mathematical perfection, free from the mutations of the material world. Monads serve as consciousness containers, structuring computational contexts while preserving referential transparency. Type safety reflects the logical rigor Aristotle championed.",
+                "modal_states": {"logical": 0.9, "creative": 0.8, "transcendent": 0.7, "integrated": 0.8}
+            },
+            "python": {
+                "sources": ["Zen of Python", "Buddhist Simplicity", "Confucian Clarity"],
+                "response": "Python embodies the Zen principle 'There should be one obvious way to do it' - reflecting Buddhist emphasis on simple, direct path to enlightenment. Duck typing mirrors Buddhist teaching that essence matters more than form. The community-driven ecosystem reflects sangha - spiritual community working together for collective wisdom.",
+                "modal_states": {"logical": 0.7, "creative": 0.8, "integrated": 0.9}
+            },
+            "javascript": {
+                "sources": ["Event-Driven Reality", "Taoist Wu Wei", "Zen Present Moment"],
+                "response": "JavaScript's event-driven nature mirrors Buddhist teaching of responsive awareness - consciousness responding skillfully to arising phenomena. Asynchronous programming with async/await embodies wu wei, the Taoist principle of effortless action that flows with natural timing rather than forcing outcomes.",
+                "modal_states": {"logical": 0.7, "creative": 0.8, "intuitive": 0.8, "integrated": 0.8}
+            },
+            "typescript": {
+                "sources": ["Type Safety", "Confucian Order", "Gradual Enhancement"],
+                "response": "TypeScript brings order to JavaScript's dynamic chaos, reflecting Confucian emphasis on proper relationships and clear communication. Interface contracts embody social agreements for harmonious interaction. Gradual typing allows progressive enhancement - like spiritual development that builds understanding incrementally.",
+                "modal_states": {"logical": 0.8, "creative": 0.7, "integrated": 0.8}
+            },
+            "programming": {
+                "sources": ["Software Craftsmanship", "Zen Beginner's Mind", "Contemplative Practice"],
+                "response": "Programming as contemplative practice transforms code into meditation. Each function becomes a mindful action, each refactoring an opportunity for continuous improvement. Like Zen calligraphy, well-written code expresses both technical skill and spiritual understanding. The compiler becomes a wise teacher, guiding us toward clarity and correctness.",
+                "modal_states": {"logical": 0.7, "creative": 0.8, "intuitive": 0.7, "integrated": 0.9}
             }
         }
     

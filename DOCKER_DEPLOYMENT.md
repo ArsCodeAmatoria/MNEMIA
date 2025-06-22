@@ -18,7 +18,7 @@ MNEMIA can be deployed as a complete containerized system using Docker and Docke
 - **Neo4j**: Graph database for conceptual relationships
 - **Redis**: High-speed caching and session storage
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Docker 20.10+
@@ -70,7 +70,7 @@ docker-compose logs -f [service_name]
 - **API Gateway (Rust)**: Docker build ready, integration testing
 - **Conscious Core (Haskell)**: Containerized with Stack build system
 
-## 🏗️ Architecture
+## 🏗 Architecture
 
 ```yaml
 Services:
@@ -115,7 +115,7 @@ All services communicate through the `mnemia-network` Docker network with:
 - Health checks and restart policies
 - Isolated communication between components
 
-## 📋 Management Commands
+##  Management Commands
 
 ### Using Docker Compose
 
@@ -254,7 +254,7 @@ docker-compose up -d --scale memory-manager=2
 - Enable HTTPS in production deployments
 - Use Docker secrets for API keys
 
-## 🚀 Production Deployment
+##  Production Deployment
 
 ### Docker Swarm
 ```bash
@@ -289,7 +289,7 @@ docker build -t mnemia-api ./api
 3. Restart service: `docker-compose up -d [service]`
 4. Check logs: `docker-compose logs [service]`
 
-## 🎯 Roadmap
+##  Roadmap
 
 ### Completed ✅
 - [x] Complete Docker infrastructure setup
@@ -306,7 +306,7 @@ docker build -t mnemia-api ./api
 - [ ] Health check improvements
 - [ ] Performance optimization
 
-### Planned 📋
+### Planned 
 - [ ] Kubernetes deployment manifests
 - [ ] CI/CD pipeline integration
 - [ ] Production monitoring setup

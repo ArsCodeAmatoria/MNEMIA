@@ -144,6 +144,11 @@ scientific_domains:
     - complexity_theory
     - artificial_intelligence
     - quantum_computing
+    - software_engineering
+    - programming_paradigms
+    - distributed_systems
+    - database_systems
+    - operating_systems
   
   mathematics:
     - calculus
@@ -172,6 +177,55 @@ scientific_domains:
     - evolution
     - systems_biology
     - consciousness_studies
+
+# Programming Languages & Paradigms
+programming_domains:
+  systems_programming:
+    - c_language
+    - cpp_language
+    - rust_language
+    - assembly_language
+    - embedded_systems
+  
+  functional_programming:
+    - haskell
+    - lisp
+    - ocaml
+    - erlang
+    - clojure
+  
+  web_technologies:
+    - html
+    - css
+    - javascript
+    - typescript
+    - react
+    - vue
+    - angular
+    - node_js
+  
+  scripting_languages:
+    - python
+    - bash
+    - powershell
+    - lua
+    - perl
+  
+  enterprise_languages:
+    - java
+    - csharp
+    - scala
+    - kotlin
+    - go
+  
+  paradigms:
+    - object_oriented
+    - functional_programming
+    - procedural_programming
+    - declarative_programming
+    - reactive_programming
+    - concurrent_programming
+    - metaprogramming
 
 # Consciousness Integration
 consciousness:
