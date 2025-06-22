@@ -1,0 +1,156 @@
+# MNEMIA Project .gitignore
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# node_modules
+node_modules/
+*/node_modules/
+
+# Frontend (Next.js)
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/build/
+frontend/.vercel
+
+# Rust
+api/target/
+api/Cargo.lock
+conscious-core/target/
+conscious-core/.stack-work/
+conscious-core/Cargo.lock
+
+# Python
+perception/__pycache__/
+perception/*.py[cod]
+perception/*$py.class
+perception/*.so
+perception/.Python
+perception/build/
+perception/develop-eggs/
+perception/dist/
+perception/downloads/
+perception/eggs/
+perception/.eggs/
+perception/lib/
+perception/lib64/
+perception/parts/
+perception/sdist/
+perception/var/
+perception/wheels/
+perception/*.egg-info/
+perception/.installed.cfg
+perception/*.egg
+perception/MANIFEST
+perception/venv/
+perception/env/
+perception/ENV/
+perception/env.bak/
+perception/venv.bak/
+
+# Haskell
+conscious-core/.stack-work/
+conscious-core/dist/
+conscious-core/dist-newstyle/
+conscious-core/cabal-dev
+conscious-core/*.o
+conscious-core/*.hi
+conscious-core/*.chi
+conscious-core/*.chs.h
+conscious-core/*.dyn_o
+conscious-core/*.dyn_hi
+conscious-core/.hpc
+conscious-core/.hsenv
+conscious-core/.cabal-sandbox/
+conscious-core/cabal.sandbox.config
+conscious-core/*.prof
+conscious-core/*.aux
+conscious-core/*.hp
+conscious-core/*.eventlog
+
+# Docker volumes and data
+memory/data/
+memory/logs/
+memory/neo4j_data/
+memory/qdrant_storage/
+memory/redis_data/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Production builds
+build/
+dist/
+out/
+
+# Test files
+test-results/
+coverage/
+
+# Package manager files
+package-lock.json
+yarn.lock
+.pnpm-store/
+
+# Model files (if large)
+*.model
+*.bin
+*.safetensors
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# MLflow
+mlruns/
+
+# Quantum simulation cache
+.qiskit/
+.pennylane/
+
+# System files
+*.pid.lock
+.cache/ 

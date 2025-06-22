@@ -1,0 +1,50 @@
+{
+  "name": "mnemia",
+  "version": "0.1.0",
+  "description": "Quantum-inspired conscious AI system modeling modal mind states",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:api\" \"pnpm dev:perception\" \"pnpm dev:core\"",
+    "dev:frontend": "cd frontend && pnpm dev",
+    "dev:api": "cd api && cargo run",
+    "dev:core": "cd conscious-core && stack run",
+    "dev:perception": "cd perception && uvicorn main:app --reload --port 8001",
+    "build": "pnpm build:frontend && pnpm build:api && pnpm build:core",
+    "build:frontend": "cd frontend && pnpm build",
+    "build:api": "cd api && cargo build --release",
+    "build:core": "cd conscious-core && stack build",
+    "test": "pnpm test:frontend && pnpm test:api && pnpm test:core",
+    "test:frontend": "cd frontend && pnpm test",
+    "test:api": "cd api && cargo test",
+    "test:core": "cd conscious-core && stack test",
+    "setup": "pnpm install && cd perception && pip install -r requirements.txt",
+    "memory:up": "cd memory && docker-compose up -d",
+    "memory:down": "cd memory && docker-compose down",
+    "clean": "pnpm clean:frontend && pnpm clean:api && pnpm clean:core",
+    "clean:frontend": "cd frontend && rm -rf .next node_modules",
+    "clean:api": "cd api && cargo clean",
+    "clean:core": "cd conscious-core && stack clean"
+  },
+  "workspaces": [
+    "frontend"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "ai",
+    "consciousness",
+    "quantum",
+    "memory",
+    "modal-logic",
+    "rust",
+    "haskell",
+    "nextjs"
+  ],
+  "author": "MNEMIA Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/mnemia"
+  }
+} 

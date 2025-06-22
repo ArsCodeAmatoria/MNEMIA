@@ -1,0 +1,57 @@
+name:                conscious-core
+version:             0.1.0.0
+github:              "your-org/mnemia"
+license:             MIT
+author:              "MNEMIA Project"
+maintainer:          "your-email@example.com"
+copyright:           "2024 MNEMIA Project"
+
+extra-source-files:
+- README.md
+
+synopsis:            Quantum-inspired conscious AI core modeling modal mind states
+category:            AI
+
+description:         Please see the README on GitHub at <https://github.com/your-org/mnemia#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- text
+- bytestring
+- vector
+- random
+- mtl
+- transformers
+- containers
+- time
+- uuid
+- scientific
+- unordered-containers
+- hashable
+
+library:
+  source-dirs: src
+
+executables:
+  conscious-core-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - conscious-core
+
+tests:
+  conscious-core-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - conscious-core
+    - hspec 
