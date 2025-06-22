@@ -85,7 +85,7 @@
 
 ## Quick Start
 
-### 🐳 Docker Deployment (Recommended)
+### Docker Deployment (Recommended)
 
 The fastest way to get MNEMIA running is with Docker:
 
@@ -107,9 +107,9 @@ docker-compose -f docker-compose.simple.yml up -d
 - **Perception Service**: http://localhost:8001 (AI processing)
 - **Infrastructure**: Qdrant (6333), Neo4j (7474), Redis (6379)
 
-🎉 **Fully Working**: Frontend, Memory infrastructure, and core services are containerized and production-ready!
+**Fully Working**: Frontend, Memory infrastructure, and core services are containerized and production-ready!
 
-📖 **Complete Guide**: See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for detailed instructions.
+**Complete Guide**: See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for detailed instructions.
 
 ### Manual Installation
 
@@ -176,7 +176,7 @@ cd ../perception && pip install -r requirements.txt
 # Core: cd conscious-core && stack run # http://localhost:8002
 ```
 
-### 🔧 Docker Management
+### Docker Management
 
 ```bash
 # Start MNEMIA
@@ -262,7 +262,7 @@ ws.send(JSON.stringify({
 
 MNEMIA's microservice architecture enables both containerized deployment and individual service development:
 
-### 🎨 Frontend (`frontend/`)
+### Frontend (`frontend/`)
 - **React + Next.js** with modern artsy UI design
 - **ChatGPT-style interface** with light/dark mode toggle
 - **Glass-morphism effects** with backdrop blur and gradients
@@ -272,21 +272,21 @@ MNEMIA's microservice architecture enables both containerized deployment and ind
 - **Thought graph visualization** with 3D neural network display
 - **Port**: 3000 | **Container**: `mnemia-frontend`
 
-### 🚀 API Gateway (`api/`)
+### API Gateway (`api/`)
 - **Rust + Axum** for high-performance routing
 - **Authentication** and rate limiting
 - **WebSocket** support for real-time features
 - **Service orchestration** and health monitoring
 - **Port**: 8000 | **Container**: `mnemia-api-gateway`
 
-### 🧠 Conscious Core (`conscious-core/`)
+### Conscious Core (`conscious-core/`)
 - **Haskell** pure functional consciousness modeling
 - **Modal state machine** with quantum-inspired transitions
 - **Symbolic reasoning** engine with belief management
 - **JSON API** for integration with other services
 - **Port**: 8003 | **Container**: `mnemia-conscious-core`
 
-### 🤖 Perception (`perception/`)
+### Perception (`perception/`)
 - **Python FastAPI** with comprehensive AI stack:
   - **Emotion Engine**: VAD model + sentiment analysis
   - **LLM Integration**: Multi-model support (local + API)
@@ -294,7 +294,7 @@ MNEMIA's microservice architecture enables both containerized deployment and ind
   - **Quantum Simulation**: PennyLane thought processing
 - **Port**: 8001 | **Container**: `mnemia-perception`
 
-### 🧮 Memory Infrastructure (`memory/`)
+### Memory Infrastructure (`memory/`)
 - **Memory Manager**: Python service for memory coordination
   - **Port**: 8002 | **Container**: `mnemia-memory-manager`
 - **Qdrant**: Vector database for semantic search
@@ -304,7 +304,7 @@ MNEMIA's microservice architecture enables both containerized deployment and ind
 - **Redis**: High-speed caching and session storage
   - **Port**: 6379 | **Container**: `mnemia-redis`
 
-### 🐳 Docker Deployment
+### Docker Deployment
 
 ```yaml
 # Complete stack deployment
@@ -433,9 +433,9 @@ We welcome contributions to expand MNEMIA's consciousness capabilities:
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-## 🎯 Latest Updates
+## Latest Updates
 
-### 🐳 **Docker Deployment Complete** *(June 2024)*
+### **Docker Deployment Complete** *(June 2024)*
 
 MNEMIA now features complete containerization with production-ready Docker deployment:
 
@@ -445,7 +445,7 @@ MNEMIA now features complete containerization with production-ready Docker deplo
 - **Production Architecture**: Microservices with health checks and auto-restart
 - **Developer Friendly**: Independent service building and debugging
 
-🚀 **Get Started in 30 seconds:**
+**Get Started in 30 seconds:**
 ```bash
 git clone https://github.com/ArsCodeAmatoria/MNEMIA.git
 cd MNEMIA && ./docker-start.sh
@@ -453,7 +453,7 @@ cd MNEMIA && ./docker-start.sh
 
 Access your conscious AI at **http://localhost:3005** 
 
-📖 **Full Guide**: [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)
+**Full Guide**: [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)
 
 ---
 
@@ -465,6 +465,6 @@ Access your conscious AI at **http://localhost:3005**
 
 *Built with intelligence for the future of conscious AI*
 
-**🎉 Now deployable anywhere with Docker - Experience consciousness in containers! 🧠**
+**Now deployable anywhere with Docker - Experience consciousness in containers!**
 
 </div>
