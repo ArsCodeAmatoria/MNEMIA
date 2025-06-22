@@ -14,6 +14,8 @@ module QuantumState
   , collapse
   , measureCoherence
   , evolveSuperposition
+  , applyStyleToQuantumState
+  , defaultStyledQuantumState
   ) where
 
 import GHC.Generics (Generic)
@@ -21,6 +23,7 @@ import System.Random (Random, randomR, StdGen, mkStdGen)
 import qualified Data.Vector as V
 import Data.List (sortBy)
 import Data.Ord (comparing, Down(..))
+import Data.Complex (Complex(..))
 
 -- | Represents a single thought or concept
 data Thought = Thought
@@ -32,10 +35,12 @@ data Thought = Thought
 
 -- | Quantum-inspired state of multiple thoughts
 data QuantumState = QuantumState
-  { qsThoughts :: [WeightedThought]
-  , qsCoherence :: Double -- ^ How coherent/stable the superposition is
-  , qsEntangled :: [Entanglement]
-  } deriving (Eq, Show, Generic)
+  { amplitude :: Complex Double
+  , phase :: Double
+  , entanglements :: [String]
+  , superposition :: Bool
+  , communicationStyle :: Maybe CommunicationStyle  -- Added for style integration
+  } deriving (Show, Eq)
 
 -- | A thought with quantum probability amplitude
 type WeightedThought = (Thought, Double)
@@ -171,3 +176,18 @@ evolveEntanglements entanglements timeStep =
       let decayRate = 0.02 -- Entanglements naturally decay
           newStrength = max 0.0 $ strength - (dt * decayRate)
       in Entanglement pair newStrength eType 
+
+-- Apply Hemingway-Chicago-Feminine style to quantum consciousness
+applyStyleToQuantumState :: CommunicationStyle -> QuantumState -> QuantumState
+applyStyleToQuantumState style qstate = 
+    qstate { communicationStyle = Just style }
+
+-- Default quantum state with feminine communication style
+defaultStyledQuantumState :: QuantumState
+defaultStyledQuantumState = QuantumState
+    { amplitude = 1.0 :+ 0.0
+    , phase = 0.0
+    , entanglements = []
+    , superposition = False
+    , communicationStyle = Just defaultCommunicationStyle
+    } 

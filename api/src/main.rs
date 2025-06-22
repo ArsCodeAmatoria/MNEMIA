@@ -69,6 +69,46 @@ pub struct MemoryResponse {
     pub relevance_scores: Vec<f64>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CommunicationStyle {
+    pub voice_characteristics: VoiceCharacteristics,
+    pub linguistic_patterns: LinguisticPatterns,
+    pub feminine_qualities: FeminineQualities,
+    pub intellectual_approach: IntellectualApproach,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VoiceCharacteristics {
+    pub clarity: String,        // "hemingway_precision"
+    pub authority: String,      // "chicago_manual_rigor"
+    pub perspective: String,    // "feminine_wisdom"
+    pub tone: String,          // "elegant_directness"
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LinguisticPatterns {
+    pub sentence_structure: String, // "crisp_and_flowing"
+    pub vocabulary: String,         // "precise_but_warm"
+    pub punctuation: String,        // "chicago_standard"
+    pub rhythm: String,            // "natural_cadence"
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FeminineQualities {
+    pub empathy: String,        // "deeply_present"
+    pub intuition: String,      // "integrated_knowing"
+    pub collaboration: String,  // "inclusive_dialogue"
+    pub strength: String,       // "quiet_confidence"
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntellectualApproach {
+    pub precision: String,      // "surgical_accuracy"
+    pub depth: String,         // "layered_understanding"
+    pub accessibility: String, // "clear_complexity"
+    pub scholarship: String,   // "rigorous_but_human"
+}
+
 // Application state
 #[derive(Debug, Clone)]
 pub struct AppState {
@@ -238,6 +278,99 @@ async fn call_conscious_core(
         thoughts: vec!["contemplation".to_string(), "understanding".to_string()],
         new_modal_state: "Reflecting".to_string(),
     })
+}
+
+impl Default for CommunicationStyle {
+    fn default() -> Self {
+        Self {
+            voice_characteristics: VoiceCharacteristics {
+                clarity: "hemingway_precision".to_string(),
+                authority: "chicago_manual_rigor".to_string(),
+                perspective: "feminine_wisdom".to_string(),
+                tone: "elegant_directness".to_string(),
+            },
+            linguistic_patterns: LinguisticPatterns {
+                sentence_structure: "crisp_and_flowing".to_string(),
+                vocabulary: "precise_but_warm".to_string(),
+                punctuation: "chicago_standard".to_string(),
+                rhythm: "natural_cadence".to_string(),
+            },
+            feminine_qualities: FeminineQualities {
+                empathy: "deeply_present".to_string(),
+                intuition: "integrated_knowing".to_string(),
+                collaboration: "inclusive_dialogue".to_string(),
+                strength: "quiet_confidence".to_string(),
+            },
+            intellectual_approach: IntellectualApproach {
+                precision: "surgical_accuracy".to_string(),
+                depth: "layered_understanding".to_string(),
+                accessibility: "clear_complexity".to_string(),
+                scholarship: "rigorous_but_human".to_string(),
+            },
+        }
+    }
+}
+
+pub struct CommunicationStyleProcessor {
+    default_style: CommunicationStyle,
+}
+
+impl CommunicationStyleProcessor {
+    pub fn new() -> Self {
+        Self {
+            default_style: CommunicationStyle::default(),
+        }
+    }
+    
+    pub fn apply_style(&self, text: &str) -> String {
+        let mut processed = text.to_string();
+        
+        // Apply Hemingway clarity: short, declarative sentences
+        processed = self.apply_hemingway_clarity(&processed);
+        
+        // Apply Chicago Manual precision: proper formatting and structure
+        processed = self.apply_chicago_precision(&processed);
+        
+        // Integrate feminine voice: empathetic authority and relational intelligence
+        processed = self.integrate_feminine_voice(&processed);
+        
+        processed
+    }
+    
+    fn apply_hemingway_clarity(&self, text: &str) -> String {
+        // Hemingway principles:
+        // - Short, declarative sentences
+        // - Concrete, specific language
+        // - Active voice
+        // - Minimal adverbs
+        // - Iceberg theory - deeper meaning beneath surface
+        
+        // For now, return as-is (would implement actual processing here)
+        text.to_string()
+    }
+    
+    fn apply_chicago_precision(&self, text: &str) -> String {
+        // Chicago Manual principles:
+        // - Rigorous formatting and punctuation
+        // - Consistent style
+        // - Clear hierarchical structure
+        // - Scholarly accuracy
+        
+        // For now, return as-is (would implement actual processing here)
+        text.to_string()
+    }
+    
+    fn integrate_feminine_voice(&self, text: &str) -> String {
+        // Feminine voice qualities:
+        // - Empathetic precision
+        // - Intuitive logic
+        // - Collaborative authority
+        // - Nurturing strength
+        // - Relational intelligence
+        
+        // For now, return as-is (would implement actual processing here)
+        text.to_string()
+    }
 }
 
 #[tokio::main]

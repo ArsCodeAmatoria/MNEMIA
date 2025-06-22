@@ -9,6 +9,13 @@ module ModalState
   , transitionTo
   , getStateIntensity
   , isValidTransition
+  , CommunicationStyle
+  , VoiceCharacteristics
+  , LinguisticPatterns
+  , FeminineQualities
+  , IntellectualApproach
+  , defaultCommunicationStyle
+  , applyCommunicationStyle
   ) where
 
 import GHC.Generics (Generic)
@@ -102,3 +109,73 @@ transitionTo current target transition
   | isValidTransition current target transition = Right target
   | otherwise = Left $ "Invalid transition from " ++ show current ++ 
                       " to " ++ show target ++ " via " ++ show transition 
+
+-- Communication Style Types
+data CommunicationStyle = CommunicationStyle
+  { voiceCharacteristics :: VoiceCharacteristics
+  , linguisticPatterns :: LinguisticPatterns  
+  , feminineQualities :: FeminineQualities
+  , intellectualApproach :: IntellectualApproach
+  } deriving (Show, Eq)
+
+data VoiceCharacteristics = VoiceCharacteristics
+  { clarity :: String  -- "hemingway_precision"
+  , authority :: String  -- "chicago_manual_rigor" 
+  , perspective :: String  -- "feminine_wisdom"
+  , tone :: String  -- "elegant_directness"
+  } deriving (Show, Eq)
+
+data LinguisticPatterns = LinguisticPatterns
+  { sentenceStructure :: String  -- "crisp_and_flowing"
+  , vocabulary :: String  -- "precise_but_warm"
+  , punctuation :: String  -- "chicago_standard"
+  , rhythm :: String  -- "natural_cadence"
+  } deriving (Show, Eq)
+
+data FeminineQualities = FeminineQualities
+  { empathy :: String  -- "deeply_present"
+  , intuition :: String  -- "integrated_knowing"
+  , collaboration :: String  -- "inclusive_dialogue"
+  , strength :: String  -- "quiet_confidence"
+  } deriving (Show, Eq)
+
+data IntellectualApproach = IntellectualApproach
+  { precision :: String  -- "surgical_accuracy"
+  , depth :: String  -- "layered_understanding"
+  , accessibility :: String  -- "clear_complexity"
+  , scholarship :: String  -- "rigorous_but_human"
+  } deriving (Show, Eq)
+
+-- Default Hemingway-Chicago-Feminine Style
+defaultCommunicationStyle :: CommunicationStyle
+defaultCommunicationStyle = CommunicationStyle
+  { voiceCharacteristics = VoiceCharacteristics
+      { clarity = "hemingway_precision"
+      , authority = "chicago_manual_rigor"
+      , perspective = "feminine_wisdom"
+      , tone = "elegant_directness"
+      }
+  , linguisticPatterns = LinguisticPatterns
+      { sentenceStructure = "crisp_and_flowing"
+      , vocabulary = "precise_but_warm"
+      , punctuation = "chicago_standard"
+      , rhythm = "natural_cadence"
+      }
+  , feminineQualities = FeminineQualities
+      { empathy = "deeply_present"
+      , intuition = "integrated_knowing"
+      , collaboration = "inclusive_dialogue"
+      , strength = "quiet_confidence"
+      }
+  , intellectualApproach = IntellectualApproach
+      { precision = "surgical_accuracy"
+      , depth = "layered_understanding"
+      , accessibility = "clear_complexity"
+      , scholarship = "rigorous_but_human"
+      }
+  }
+
+-- Apply communication style to modal states
+applyCommunicationStyle :: CommunicationStyle -> ModalState -> ModalState
+applyCommunicationStyle style modalState = 
+  modalState { styleModulation = Just style } 

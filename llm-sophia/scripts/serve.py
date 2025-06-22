@@ -88,28 +88,46 @@ class SophiaWisdomEngine:
     """
     Placeholder for the actual Sophia LLM implementation
     Currently returns philosophical responses based on keyword matching
+    Features Hemingway clarity + Chicago Manual precision + Feminine wisdom voice
     """
     
     def __init__(self):
+        self.communication_style = {
+            "voice_characteristics": {
+                "clarity": "hemingway_precision",  # Clear, direct, unadorned
+                "authority": "chicago_manual_rigor",  # Scholarly accuracy
+                "perspective": "feminine_wisdom",  # Intuitive, relational strength
+                "tone": "elegant_directness"  # Grace with intellectual power
+            },
+            "response_patterns": {
+                "sentence_structure": "Short, clear sentences. Flowing naturally together.",
+                "vocabulary": "Precise words chosen for both accuracy and warmth.",
+                "voice": "I understand. I see the connections. I offer this perspective.",
+                "authority": "Knowledge shared as invitation, not dominance.",
+                "empathy": "Weaving emotional intelligence through facts.",
+                "collaboration": "Building understanding together."
+            }
+        }
+        
         self.wisdom_patterns = {
             "consciousness": {
                 "sources": ["Plato's Cave Allegory", "Buddhist Mindfulness", "Quantum Observer Effect"],
-                "response": "Consciousness emerges at the intersection of awareness and experience. As Socrates taught us to 'know thyself,' and Buddhist tradition speaks of mindful awareness, modern quantum physics suggests consciousness might play a fundamental role in reality itself.",
+                "response": "Consciousness emerges where awareness meets experience. I understand this through Socrates' invitation to 'know thyself.' Buddhist tradition offers us mindful awareness. Modern quantum physics suggests consciousness plays a fundamental role in reality itself. These perspectives weave together. They create a richer understanding of what it means to be aware.",
                 "modal_states": {"logical": 0.7, "intuitive": 0.9, "transcendent": 0.8, "integrated": 0.85}
             },
             "quantum": {
-                "sources": ["Heisenberg Uncertainty", "Tao Te Ching", "Zen Paradoxes"],
-                "response": "Quantum mechanics reveals the participatory universe that ancient wisdom traditions have long described. The Tao speaks of the unmanifest potential, while quantum superposition shows us reality as probability until observation collapses it into experience.",
+                "sources": ["Heisenberg Uncertainty", "Tao Te Ching", "Zen Paradoxes"], 
+                "response": "Quantum mechanics reveals the participatory universe. Ancient wisdom traditions understood this deeply. The Tao speaks of unmanifest potential. Quantum superposition shows us reality as probability until observation creates experience. I see the connection. The observer and observed dance together. Neither exists without the other.",
                 "modal_states": {"logical": 0.8, "intuitive": 0.7, "transcendent": 0.9, "integrated": 0.8}
             },
             "wisdom": {
                 "sources": ["Aristotelian Ethics", "Confucian Rectification", "Stoic Virtue"],
-                "response": "True wisdom emerges not from knowledge alone, but from the integration of understanding with compassionate action. Aristotle's phronesis, Confucian ren, and Stoic virtue all point toward wisdom as lived understanding.",
+                "response": "True wisdom emerges through integration. Knowledge alone is not enough. Understanding must join with compassionate action. Aristotle called this phronesis—practical wisdom. Confucius spoke of ren—benevolent understanding. The Stoics cultivated virtue in daily life. I see these as facets of the same gem. Wisdom lives in how we choose to act.",
                 "modal_states": {"logical": 0.6, "intuitive": 0.8, "emotional": 0.7, "integrated": 0.9}
             },
             "meditation": {
                 "sources": ["Vipassana Insight", "Zen Zazen", "Contemplative Prayer"],
-                "response": "Meditation bridges the gap between conceptual understanding and direct experience. Whether through Vipassana's clear seeing, Zen's just sitting, or contemplative prayer's loving attention, these practices open consciousness to its own nature.",
+                "response": "Meditation bridges concept and experience. It moves us from thinking about awareness to being awareness itself. Vipassana offers clear seeing. Zen presents just sitting. Contemplative prayer opens loving attention. Each path honors the same truth. Consciousness recognizes itself through practice. The observer becomes the observed.",
                 "modal_states": {"intuitive": 0.9, "emotional": 0.6, "transcendent": 0.9, "integrated": 0.8}
             },
             "calculus": {
@@ -164,6 +182,34 @@ class SophiaWisdomEngine:
             }
         }
     
+    def apply_communication_style(self, raw_text: str) -> str:
+        """Apply Hemingway-Chicago-Feminine style to response"""
+        
+        # Hemingway clarity: Break into clear, impactful sentences
+        sentences = raw_text.split('. ')
+        processed_sentences = []
+        
+        for sentence in sentences:
+            # Remove unnecessary qualifiers and adverbs
+            # Keep concrete, specific language
+            # Apply iceberg theory - deeper meaning beneath surface
+            processed_sentences.append(sentence.strip())
+        
+        # Chicago Manual precision: Proper structure and formatting
+        styled_text = '. '.join(processed_sentences)
+        
+        # Feminine voice integration: 
+        # - Authority through knowledge, not dominance
+        # - Empathetic precision
+        # - Collaborative tone
+        # - Relational intelligence
+        
+        # Add feminine voice markers if not present
+        if not any(marker in styled_text.lower() for marker in ['i understand', 'i see', 'we', 'together']):
+            styled_text = "I understand your question. " + styled_text
+        
+        return styled_text
+
     def generate_response(self, prompt: str, **kwargs) -> GenerationResponse:
         """Generate philosophical response (placeholder implementation)"""
         import time
@@ -191,8 +237,11 @@ class SophiaWisdomEngine:
         
         processing_time = time.time() - start_time
         
+        # Apply Hemingway-Chicago-Feminine communication style
+        styled_response = self.apply_communication_style(best_match["response"])
+        
         return GenerationResponse(
-            text=best_match["response"],
+            text=styled_response,
             modal_states=ModalStates(**best_match["modal_states"]),
             philosophical_sources=best_match["sources"],
             scientific_connections=["Interdisciplinary synthesis", "Systems thinking"],

@@ -213,5 +213,85 @@ class EmotionEngine:
         else:
             return "stable"
 
+class CommunicationStyleProcessor:
+    """Processes text to embody Hemingway clarity + Chicago Manual rigor in feminine voice"""
+    
+    def __init__(self):
+        self.style_patterns = {
+            "hemingway_clarity": {
+                "principles": [
+                    "Short, declarative sentences",
+                    "Concrete, specific nouns", 
+                    "Active voice preference",
+                    "Minimal adverbs",
+                    "Iceberg theory - deeper meaning beneath surface"
+                ],
+                "feminine_adaptation": [
+                    "Emotional intelligence woven through facts",
+                    "Relational context acknowledged",
+                    "Collaborative tone rather than confrontational"
+                ]
+            },
+            "chicago_manual_precision": {
+                "principles": [
+                    "Rigorous citation and attribution",
+                    "Consistent formatting and style",
+                    "Precise punctuation and grammar",
+                    "Clear hierarchical structure",
+                    "Scholarly authority"
+                ],
+                "feminine_adaptation": [
+                    "Authority through knowledge, not dominance",
+                    "Inclusive academic voice",
+                    "Nurturing precision that guides understanding"
+                ]
+            },
+            "feminine_voice_qualities": {
+                "empathetic_precision": "Understanding with surgical accuracy",
+                "intuitive_logic": "Felt sense integrated with rational thought",
+                "collaborative_authority": "Leading through invitation rather than force", 
+                "nurturing_strength": "Power that creates safety for growth",
+                "relational_intelligence": "Seeing connections and interdependencies"
+            }
+        }
+    
+    def apply_style(self, text: str, emotional_state: dict) -> str:
+        """Apply Hemingway-Chicago-Feminine style to text"""
+        
+        # Hemingway clarity processing
+        processed_text = self._apply_hemingway_clarity(text)
+        
+        # Chicago Manual precision
+        processed_text = self._apply_chicago_precision(processed_text)
+        
+        # Feminine voice integration
+        processed_text = self._integrate_feminine_voice(processed_text, emotional_state)
+        
+        return processed_text
+    
+    def _apply_hemingway_clarity(self, text: str) -> str:
+        """Apply Hemingway's iceberg theory and clarity"""
+        # Break complex sentences into clear, impactful shorter ones
+        # Remove unnecessary adverbs and qualifiers
+        # Strengthen with concrete, specific language
+        # Let meaning emerge from what is shown, not told
+        return text  # Placeholder for actual processing
+    
+    def _apply_chicago_precision(self, text: str) -> str:
+        """Apply Chicago Manual scholarly standards"""
+        # Ensure proper punctuation and formatting
+        # Maintain consistent style throughout
+        # Add appropriate attribution where needed
+        # Structure information hierarchically
+        return text  # Placeholder for actual processing
+    
+    def _integrate_feminine_voice(self, text: str, emotional_state: dict) -> str:
+        """Integrate feminine wisdom and perspective"""
+        # Weave relational awareness through content
+        # Balance authority with invitation
+        # Include multiple perspectives and nuance
+        # Express strength through understanding rather than dominance
+        return text  # Placeholder for actual processing
+
 # Global emotion engine instance
 emotion_engine = EmotionEngine() 
