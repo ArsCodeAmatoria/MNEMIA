@@ -1,0 +1,86 @@
+# Core ML/AI Libraries
+torch>=2.0.0
+transformers>=4.35.0
+datasets>=2.14.0
+tokenizers>=0.14.0
+accelerate>=0.21.0
+peft>=0.6.0  # For LoRA fine-tuning
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+nltk>=3.8
+spacy>=3.6.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+aiohttp>=3.8.0
+
+# Text Processing & NLP
+sentence-transformers>=2.2.0
+langdetect>=1.0.9
+ftfy>=6.1.0  # Text encoding fixes
+unidecode>=1.3.0
+
+# Scientific Computing
+sympy>=1.12  # For mathematical expressions
+scikit-learn>=1.3.0
+
+# Advanced Mathematics
+numpy>=1.24.0  # Already included above but essential
+scipy>=1.11.0  # Already included above
+matplotlib>=3.7.0  # Mathematical visualization
+seaborn>=0.12.0  # Statistical visualization
+statsmodels>=0.14.0  # Statistical modeling
+cvxpy>=1.4.0  # Convex optimization
+cvxopt>=1.3.0  # Optimization algorithms
+
+# Stochastic Calculus & Finance
+quantlib>=1.32  # Quantitative finance library
+arch>=6.2.0  # ARCH/GARCH models for financial time series
+pymc>=5.7.0  # Bayesian statistical modeling
+pystan>=3.7.0  # Bayesian inference
+
+# Linear Algebra & Geometry
+networkx>=3.1  # Graph theory and network analysis
+igraph>=0.10.0  # Graph analysis
+gudhi>=3.8.0  # Computational topology
+geomstats>=2.6.0  # Statistics on manifolds
+
+# Symbolic Mathematics
+sage-math>=10.0  # Comprehensive mathematical software (optional)
+maxima>=5.47.0  # Computer algebra system (optional)
+gap-python>=0.9.0  # Group theory computations (optional)
+
+# Training & Experiment Tracking
+wandb>=0.16.0  # Weights & Biases
+mlflow>=2.7.0
+tensorboard>=2.14.0
+
+# Model Serving & Inference
+vllm>=0.2.0  # Fast inference engine
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Database & Storage
+pymongo>=4.5.0  # For metadata storage
+redis>=5.0.0
+qdrant-client>=1.6.0  # Vector database
+
+# Utilities
+tqdm>=4.66.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
+click>=8.1.0  # CLI interface
+rich>=13.6.0  # Beautiful terminal output
+
+# Development & Testing
+pytest>=7.4.0
+black>=23.9.0
+flake8>=6.1.0
+jupyter>=1.0.0
+
+# Web Scraping (for data collection)
+scrapy>=2.11.0
+selenium>=4.15.0
+playwright>=1.39.0 

@@ -1,0 +1,254 @@
+# Sophia LLM Configuration
+project_name: "sophia-wisdom-llm"
+version: "1.0.0"
+description: "Philosophical and Scientific Wisdom LLM for MNEMIA"
+
+# Model Configuration
+model:
+  # Base model options: "llama2-7b", "llama2-13b", "mistral-7b", "custom"
+  base_model: "meta-llama/Llama-2-7b-chat-hf"
+  model_max_length: 8192
+  use_flash_attention: true
+  
+  # Custom architecture components
+  custom_components:
+    philosophy_attention: true
+    consciousness_integration: true
+    cross_cultural_reasoning: true
+    wisdom_synthesis: true
+  
+  # Consciousness states (matching MNEMIA)
+  consciousness_states:
+    - logical
+    - intuitive  
+    - emotional
+    - creative
+    - transcendent
+    - integrated
+
+# Training Configuration
+training:
+  # Hardware settings
+  device: "auto"  # "cuda", "cpu", "auto"
+  fp16: true
+  gradient_checkpointing: true
+  dataloader_num_workers: 4
+  
+  # Training hyperparameters
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 8
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  
+  # Learning rate schedule
+  lr_scheduler_type: "cosine"
+  lr_scheduler_kwargs:
+    num_cycles: 0.5
+  
+  # Evaluation and saving
+  evaluation_strategy: "steps"
+  eval_steps: 500
+  save_strategy: "steps"  
+  save_steps: 1000
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  
+  # Logging
+  logging_steps: 100
+  report_to: ["wandb", "tensorboard"]
+
+# Dataset Configuration
+data:
+  # Data composition weights
+  composition:
+    classical_philosophy: 0.40  # Greek, Roman, Modern Western
+    eastern_wisdom: 0.30        # Chinese, Indian, Buddhist, Japanese
+    modern_science: 0.20        # Physics, CS, Mathematics, Biology
+    consciousness_studies: 0.10  # Mystical, Gnostic, Consciousness research
+  
+  # Data sources
+  sources:
+    perseus_digital_library: true
+    stanford_philosophy: true
+    chinese_text_project: true
+    buddhist_texts: true
+    arxiv_papers: true
+    gnostic_library: true
+    consciousness_journals: true
+  
+  # Processing settings
+  max_sequence_length: 8192
+  min_sequence_length: 256
+  overlap_ratio: 0.1
+  quality_threshold: 0.8
+
+# Philosophical Domains
+philosophical_domains:
+  ancient_greek:
+    - socrates
+    - plato
+    - aristotle
+    - stoics
+    - presocractics
+  
+  roman_thought:
+    - cicero
+    - seneca
+    - marcus_aurelius
+    - plotinus
+    - augustine
+  
+  eastern_wisdom:
+    chinese:
+      - tao_te_ching
+      - confucius
+      - zhuangzi
+      - art_of_war
+      - i_ching
+    buddhist:
+      - four_noble_truths
+      - eightfold_path
+      - zen_koans
+      - tibetan_buddhism
+      - vipassana
+    japanese:
+      - bushido
+      - way_of_samurai
+      - zen_buddhism
+      - shintoism
+  
+  modern_philosophy:
+    - descartes
+    - kant
+    - hegel
+    - nietzsche
+    - existentialism
+
+# Scientific Domains  
+scientific_domains:
+  theoretical_physics:
+    - quantum_mechanics
+    - relativity
+    - cosmology
+    - string_theory
+    - consciousness_physics
+  
+  computer_science:
+    - algorithms
+    - data_structures
+    - complexity_theory
+    - artificial_intelligence
+    - quantum_computing
+  
+  mathematics:
+    - calculus
+    - multivariable_calculus
+    - ito_calculus
+    - stochastic_calculus
+    - linear_algebra
+    - abstract_algebra
+    - differential_geometry
+    - riemannian_geometry
+    - topology
+    - trigonometry
+    - discrete_mathematics
+    - number_theory
+    - category_theory
+    - mathematical_logic
+    - real_analysis
+    - complex_analysis
+    - functional_analysis
+    - measure_theory
+    - probability_theory
+  
+  life_sciences:
+    - biology
+    - neuroscience
+    - evolution
+    - systems_biology
+    - consciousness_studies
+
+# Consciousness Integration
+consciousness:
+  # Modal state mapping
+  state_detection:
+    logical: ["reasoning", "analysis", "logic", "proof", "argument"]
+    intuitive: ["insight", "understanding", "realization", "wisdom", "intuition"]
+    emotional: ["feeling", "emotion", "compassion", "love", "empathy"]
+    creative: ["imagination", "creativity", "innovation", "synthesis", "vision"]
+    transcendent: ["mystical", "spiritual", "transcendent", "unity", "enlightenment"]
+    integrated: ["holistic", "integrated", "unified", "balanced", "complete"]
+  
+  # Wisdom synthesis patterns
+  synthesis_patterns:
+    - cross_cultural_comparison
+    - ancient_modern_integration
+    - scientific_spiritual_bridge
+    - practical_mystical_unity
+    - logical_intuitive_balance
+
+# Evaluation Metrics
+evaluation:
+  philosophical_accuracy:
+    source_attribution: 0.9
+    concept_understanding: 0.85
+    historical_context: 0.8
+  
+  cross_cultural_synthesis:
+    coherence_score: 0.8
+    tradition_respect: 0.95
+    novel_insights: 0.7
+  
+  scientific_rigor:
+    mathematical_accuracy: 0.95
+    factual_correctness: 0.9
+    logical_consistency: 0.85
+  
+  consciousness_integration:
+    modal_state_accuracy: 0.8
+    wisdom_coherence: 0.75
+    practical_relevance: 0.8
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8003
+  max_tokens: 2048
+  temperature: 0.7
+  top_p: 0.9
+  frequency_penalty: 0.1
+  presence_penalty: 0.1
+  
+  # Response formatting
+  include_sources: true
+  include_modal_states: true
+  include_cross_references: true
+  include_practical_applications: true
+
+# Integration with MNEMIA
+mnemia_integration:
+  perception_service_url: "http://localhost:8001"
+  memory_service_url: "http://localhost:8002"
+  api_service_url: "http://localhost:8000"
+  
+  # Consciousness state synchronization
+  sync_modal_states: true
+  update_memory_with_insights: true
+  enable_cross_service_learning: true
+
+# Monitoring and Logging
+monitoring:
+  log_level: "INFO"
+  enable_metrics: true
+  metrics_port: 9090
+  
+  # Performance tracking
+  track_response_time: true
+  track_memory_usage: true
+  track_philosophical_accuracy: true
+  track_user_satisfaction: true 

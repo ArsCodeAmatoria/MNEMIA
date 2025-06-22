@@ -104,10 +104,12 @@ services:
       - CONSCIOUS_CORE_URL=http://conscious-core:8003
       - PERCEPTION_URL=http://perception:8001
       - MEMORY_URL=http://memory-manager:8002
+      - SOPHIA_URL=http://sophia-llm:8003
     depends_on:
       - conscious-core
       - perception
       - memory-manager
+      - sophia-llm
     restart: unless-stopped
     networks:
       - mnemia-network
@@ -160,6 +162,41 @@ services:
     networks:
       - mnemia-network
 
+  # Sophia LLM - Philosophical Wisdom AI
+  sophia-llm:
+    build:
+      context: ./llm-sophia
+      dockerfile: Dockerfile
+    container_name: mnemia-sophia-llm
+    ports:
+      - "8004:8003"  # External 8004 -> Internal 8003
+    environment:
+      - SOPHIA_API_PORT=8003
+      - MNEMIA_PERCEPTION_URL=http://perception:8001
+      - MNEMIA_MEMORY_URL=http://memory-manager:8002
+      - MNEMIA_API_URL=http://api-gateway:8000
+      - SOPHIA_MODEL_PATH=/app/models/fine_tuned/sophia
+      - LOG_LEVEL=INFO
+      - HF_HOME=/app/cache/huggingface
+      - TRANSFORMERS_CACHE=/app/cache/huggingface
+    volumes:
+      - sophia_models:/app/models
+      - sophia_cache:/app/cache
+      - sophia_data:/app/data
+    depends_on:
+      - perception
+      - memory-manager
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - mnemia-network
+
   # ===================
   # FRONTEND
   # ===================
@@ -194,6 +231,12 @@ volumes:
   neo4j_plugins:
     driver: local
   redis_data:
+    driver: local
+  sophia_models:
+    driver: local
+  sophia_cache:
+    driver: local
+  sophia_data:
     driver: local
 
 networks:
