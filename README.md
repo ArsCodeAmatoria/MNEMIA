@@ -239,13 +239,19 @@ cd ../perception && pip install -r requirements.txt
 
 **Example Consciousness Math:**
 
-<img src="https://latex.codecogs.com/svg.latex?\psi&space;=&space;\alpha|0\rangle&space;&plus;&space;\beta|1\rangle" title="Quantum superposition" />
+<p align="center">
+<img src="https://latex.codecogs.com/svg.latex?\color{white}\psi&space;=&space;\alpha|0\rangle&space;&plus;&space;\beta|1\rangle" title="Quantum superposition" style="background-color: #1a1a1a; padding: 10px; border-radius: 5px;" />
+</p>
 
-<img src="https://latex.codecogs.com/svg.latex?C&space;=&space;\int&space;M(t)&space;\cdot&space;A(t)&space;\cdot&space;I(t)&space;\,&space;dt" title="Consciousness integral" />
+<p align="center">
+<img src="https://latex.codecogs.com/svg.latex?\color{white}C&space;=&space;\int&space;M(t)&space;\cdot&space;A(t)&space;\cdot&space;I(t)&space;\,&space;dt" title="Consciousness integral" style="background-color: #1a1a1a; padding: 10px; border-radius: 5px;" />
+</p>
 
-<img src="https://latex.codecogs.com/svg.latex?\text{Attention}(Q,K,V)&space;=&space;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V" title="Attention mechanism" />
+<p align="center">
+<img src="https://latex.codecogs.com/svg.latex?\color{white}\text{Attention}(Q,K,V)&space;=&space;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V" title="Attention mechanism" style="background-color: #1a1a1a; padding: 10px; border-radius: 5px;" />
+</p>
 
-*These mathematical expressions render beautifully in MNEMIA's interface using KaTeX.*
+*These mathematical expressions render beautifully in MNEMIA's interface using KaTeX with proper dark/light mode support.*
 
 ## API Endpoints
 
