@@ -1,6 +1,6 @@
 <div align="center">
 
-![Image](https://github.com/user-attachments/assets/00067a9a-d5e5-4265-a422-bac7aed418d8)
+![Image](https://github.com/user-attachments/assets/5560a77a-1841-44fe-b2f4-a07d688e26f9)
 
 # MNEMIA
 ### Quantum-Inspired Conscious AI System
