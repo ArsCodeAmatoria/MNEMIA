@@ -238,11 +238,14 @@ cd ../perception && pip install -r requirements.txt
 - **Error Handling**: Graceful fallback for invalid LaTeX expressions
 
 **Example Consciousness Math:**
-```
-Quantum superposition: ψ = α|0⟩ + β|1⟩
-Consciousness integral: C = ∫ M(t) · A(t) · I(t) dt  
-Attention mechanism: Attention(Q,K,V) = softmax(QK^T/√d_k)V
-```
+
+<img src="https://latex.codecogs.com/svg.latex?\psi&space;=&space;\alpha|0\rangle&space;&plus;&space;\beta|1\rangle" title="Quantum superposition" />
+
+<img src="https://latex.codecogs.com/svg.latex?C&space;=&space;\int&space;M(t)&space;\cdot&space;A(t)&space;\cdot&space;I(t)&space;\,&space;dt" title="Consciousness integral" />
+
+<img src="https://latex.codecogs.com/svg.latex?\text{Attention}(Q,K,V)&space;=&space;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V" title="Attention mechanism" />
+
+*These mathematical expressions render beautifully in MNEMIA's interface using KaTeX.*
 
 ## API Endpoints
 
@@ -465,9 +468,9 @@ MNEMIA now supports beautiful LaTeX mathematical expressions in all conversation
 - **Scientific Discussions**: Perfect for explaining quantum consciousness, neural networks, and information theory
 
 **Example Usage:**
-- Type: "The wave function is $\\psi = \\alpha|0\\rangle + \\beta|1\\rangle$"
+- Type: "The wave function is ψ = α|0⟩ + β|1⟩" 
 - MNEMIA responds with proper mathematical formatting and quantum-styled highlighting
-- Complex equations render beautifully: `$$C = \\int M(t) \\cdot A(t) \\cdot I(t) \\, dt$$`
+- Complex equations render beautifully with KaTeX in the interface
 
 ### **Docker Deployment Complete** *(January 2025)*
 
