@@ -60,4 +60,26 @@ python-jose[cryptography]==3.3.0
 
 # Additional AI dependencies
 datasets==2.14.0
-accelerate==0.24.0 
+accelerate==0.24.0
+
+# Async and networking
+aiohttp>=3.8.0
+asyncio-throttle>=1.0.2
+websockets>=11.0.0
+
+# Token counting and cost estimation
+tiktoken>=0.5.0
+
+# Configuration and environment
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Performance monitoring
+psutil>=5.9.0
+
+# Development and testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+isort>=5.12.0 
