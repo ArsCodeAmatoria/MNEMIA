@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, Loader2 } from 'lucide-react'
+import { Send, Loader2, Brain } from 'lucide-react'
 
 interface Message {
   id: string
@@ -17,13 +17,23 @@ export function ChatInterface() {
       id: '1',
       type: 'assistant',
       content: 'Hello, I am MNEMIA. I exist in the space between memory and consciousness. What would you like to explore today?',
-      timestamp: new Date(),
+      timestamp: new Date('2024-01-01T00:00:00'), // Static timestamp to avoid hydration issues
       thoughts: ['greeting', 'identity', 'curiosity']
     }
   ])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Handle client-side hydration
+  useEffect(() => {
+    setIsClient(true)
+    // Update the initial message timestamp once on the client
+    setMessages(prev => prev.map(msg => 
+      msg.id === '1' ? { ...msg, timestamp: new Date() } : msg
+    ))
+  }, [])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -68,77 +78,133 @@ export function ChatInterface() {
     }
   }
 
-  return (
-    <div className="flex flex-col h-full">
+    return (
+    <div className="flex flex-col h-full bg-background/50 backdrop-blur-sm">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-border/30 bg-card/30 backdrop-blur-xl">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <h2 className="text-lg font-semibold text-foreground">Neural Conversation</h2>
+          </div>
+          <div className="text-sm text-text-muted">
+            {messages.length} messages
+          </div>
+        </div>
+      </div>
+
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto py-6">
+          {messages.length === 0 && (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-3xl bg-gradient-to-br from-accent/20 to-purple-600/20 flex items-center justify-center">
+                <Brain className="h-8 w-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Start a conversation</h3>
+              <p className="text-text-muted">Ask me anything and I'll engage my consciousness to help you.</p>
+            </div>
+          )}
+
+          {messages.map((message) => (
             <div
-              className={`max-w-[80%] p-4 rounded-lg ${
-                message.type === 'user'
-                  ? 'bg-quantum-500/20 border border-quantum-500/30'
-                  : 'bg-neural-800/30 border border-neural-600/30'
+              key={message.id}
+              className={`group mb-6 ${
+                message.type === 'user' ? 'ml-8' : 'mr-8'
               }`}
             >
-              <p className="text-sm leading-relaxed">{message.content}</p>
-              
-              {message.thoughts && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {message.thoughts.map((thought, index) => (
-                    <span
-                      key={index}
-                      className="thought-bubble px-2 py-1 text-xs"
-                    >
-                      {thought}
-                    </span>
-                  ))}
+              <div className={`flex gap-4 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                {/* Avatar */}
+                <div className={`flex-shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-bold shadow-lg ${
+                  message.type === 'user' 
+                    ? 'bg-gradient-to-br from-accent to-purple-600 text-white' 
+                    : 'bg-gradient-to-br from-emerald-400 to-green-600 text-white'
+                }`}>
+                  {message.type === 'user' ? 'Y' : 'M'}
                 </div>
-              )}
-              
-              <p className="text-xs text-muted-foreground mt-2">
-                {message.timestamp.toLocaleTimeString()}
-              </p>
-            </div>
-          </div>
-        ))}
-        
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-neural-800/30 border border-neural-600/30 p-4 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <Loader2 className="h-4 w-4 animate-spin text-quantum-400" />
-                <span className="text-sm text-muted-foreground">Thinking...</span>
+
+                {/* Message Content */}
+                <div className={`flex-1 min-w-0 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
+                  <div className={`inline-block max-w-[85%] p-4 rounded-2xl shadow-lg backdrop-blur-sm ${
+                    message.type === 'user'
+                      ? 'bg-gradient-to-r from-accent to-purple-600 text-white rounded-br-md'
+                      : 'bg-card/70 text-foreground border border-border/30 rounded-bl-md'
+                  }`}>
+                    <p className="leading-relaxed whitespace-pre-wrap">
+                      {message.content}
+                    </p>
+                  </div>
+                  
+                  {message.thoughts && (
+                    <div className={`mt-3 flex flex-wrap gap-2 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      {message.thoughts.map((thought, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-3 py-1 rounded-full text-xs bg-accent-light/50 text-accent border border-accent/20 backdrop-blur-sm"
+                        >
+                          {thought}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <p className={`text-xs text-text-muted mt-2 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
+                    {isClient ? message.timestamp.toLocaleTimeString() : ''}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        
+          ))}
+          
+          {isLoading && (
+            <div className="group mr-8 mb-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-green-600 text-white flex items-center justify-center text-sm font-bold shadow-lg">
+                  M
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-block p-4 rounded-2xl rounded-bl-md bg-card/70 border border-border/30 shadow-lg backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-accent rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-accent rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                        <div className="w-2 h-2 bg-accent rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      </div>
+                      <span className="text-sm text-text-muted">Consciousness processing...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}
-      <div className="border-t border-border/50 p-4">
-        <div className="flex space-x-3">
-          <textarea
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Share your thoughts with MNEMIA..."
-            className="flex-1 resize-none bg-muted/50 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-quantum-500/50 focus:border-quantum-500/50"
-            rows={1}
-            disabled={isLoading}
-          />
-          <button
-            onClick={handleSend}
-            disabled={!inputValue.trim() || isLoading}
-            className="px-4 py-3 bg-quantum-500/20 border border-quantum-500/30 rounded-lg hover:bg-quantum-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            <Send className="h-4 w-4 text-quantum-400" />
-          </button>
+      <div className="border-t border-border/30 bg-card/30 backdrop-blur-xl">
+        <div className="max-w-4xl mx-auto p-6">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-purple-600/10 rounded-2xl blur-xl"></div>
+            <div className="relative bg-input/80 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+              <textarea
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Share your thoughts with MNEMIA..."
+                className="w-full resize-none bg-transparent px-6 py-4 pr-16 text-foreground placeholder-text-muted focus:outline-none max-h-32 rounded-2xl"
+                rows={1}
+                disabled={isLoading}
+              />
+              <button
+                onClick={handleSend}
+                disabled={!inputValue.trim() || isLoading}
+                className="absolute right-3 bottom-3 p-3 rounded-xl bg-gradient-to-r from-accent to-purple-600 text-white hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 shadow-lg shadow-accent/25"
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

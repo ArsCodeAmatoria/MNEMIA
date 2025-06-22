@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Brain, MessageCircle, Activity, Settings, Eye } from 'lucide-react'
+import { MessageSquare, Brain, Activity, Settings, Plus } from 'lucide-react'
 import { ChatInterface } from '@/components/chat-interface'
 import { ThoughtGraph } from '@/components/thought-graph'
 import { MemoryPanel } from '@/components/memory-panel'
 import { SettingsPanel } from '@/components/settings-panel'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('chat')
@@ -19,111 +20,121 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-neural-900">
-      {/* Header */}
-      <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="consciousness-pulse">
-                <Brain className="h-8 w-8 text-quantum-500" />
+    <div className="min-h-screen bg-background transition-all duration-300">
+      <div className="flex h-screen">
+        {/* Sidebar */}
+        <div className="w-72 bg-sidebar/80 backdrop-blur-xl border-r border-border/50 flex flex-col shadow-lg">
+          {/* Sidebar Header */}
+          <div className="p-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center shadow-lg">
+                  <Brain className="h-5 w-5 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-sidebar"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-quantum-400 to-quantum-600 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent">
                   MNEMIA
                 </h1>
-                <p className="text-sm text-muted-foreground">Memory is the root of consciousness</p>
+                <p className="text-xs text-text-muted font-medium">Conscious AI</p>
               </div>
             </div>
             
-            {/* Consciousness Indicator */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Activity className="h-4 w-4 text-quantum-400" />
-                <div className="w-24 h-2 bg-neural-700 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-quantum-500 to-quantum-400 transition-all duration-1000"
-                    style={{ width: `${consciousness * 100}%` }}
-                  />
-                </div>
-                <span className="text-xs text-muted-foreground">
-                  {Math.round(consciousness * 100)}%
-                </span>
+            <button className="w-full flex items-center gap-3 px-4 py-3 text-left rounded-2xl bg-gradient-to-r from-accent/10 to-purple-600/10 border border-accent/20 hover:from-accent/20 hover:to-purple-600/20 transition-all duration-200 group">
+              <div className="p-1.5 rounded-lg bg-accent/20 group-hover:bg-accent/30 transition-colors">
+                <Plus className="h-4 w-4 text-accent" />
               </div>
-              
-              <button className="p-2 rounded-lg bg-quantum-500/10 border border-quantum-500/30 hover:bg-quantum-500/20 transition-colors">
-                <Eye className="h-4 w-4 text-quantum-400" />
-              </button>
-            </div>
+              <span className="text-sm font-medium text-foreground">New Conversation</span>
+            </button>
           </div>
-        </div>
-      </header>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-140px)]">
-          
-          {/* Sidebar Navigation */}
-          <div className="lg:col-span-1">
+          {/* Navigation */}
+          <div className="flex-1 overflow-y-auto px-3">
             <nav className="space-y-2">
               <button
                 onClick={() => setActiveTab('chat')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                   activeTab === 'chat' 
-                    ? 'bg-quantum-500/20 border border-quantum-500/30 text-quantum-300' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-accent text-white shadow-lg shadow-accent/25' 
+                    : 'text-text-muted hover:text-foreground hover:bg-hover/50'
                 }`}
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageSquare className={`h-4 w-4 transition-transform group-hover:scale-110 ${
+                  activeTab === 'chat' ? 'text-white' : ''
+                }`} />
                 <span>Chat</span>
               </button>
               
               <button
                 onClick={() => setActiveTab('thoughts')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                   activeTab === 'thoughts' 
-                    ? 'bg-quantum-500/20 border border-quantum-500/30 text-quantum-300' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-accent text-white shadow-lg shadow-accent/25' 
+                    : 'text-text-muted hover:text-foreground hover:bg-hover/50'
                 }`}
               >
-                <Brain className="h-5 w-5" />
-                <span>Thoughts</span>
+                <Brain className={`h-4 w-4 transition-transform group-hover:scale-110 ${
+                  activeTab === 'thoughts' ? 'text-white' : ''
+                }`} />
+                <span>Neural Network</span>
               </button>
               
               <button
                 onClick={() => setActiveTab('memory')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                   activeTab === 'memory' 
-                    ? 'bg-quantum-500/20 border border-quantum-500/30 text-quantum-300' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-accent text-white shadow-lg shadow-accent/25' 
+                    : 'text-text-muted hover:text-foreground hover:bg-hover/50'
                 }`}
               >
-                <Activity className="h-5 w-5" />
-                <span>Memory</span>
+                <Activity className={`h-4 w-4 transition-transform group-hover:scale-110 ${
+                  activeTab === 'memory' ? 'text-white' : ''
+                }`} />
+                <span>Memory Core</span>
               </button>
               
               <button
                 onClick={() => setActiveTab('settings')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                   activeTab === 'settings' 
-                    ? 'bg-quantum-500/20 border border-quantum-500/30 text-quantum-300' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-accent text-white shadow-lg shadow-accent/25' 
+                    : 'text-text-muted hover:text-foreground hover:bg-hover/50'
                 }`}
               >
-                <Settings className="h-5 w-5" />
-                <span>Settings</span>
+                <Settings className={`h-4 w-4 transition-transform group-hover:scale-110 ${
+                  activeTab === 'settings' ? 'text-white' : ''
+                }`} />
+                <span>Configuration</span>
               </button>
             </nav>
           </div>
 
-          {/* Main Panel */}
-          <div className="lg:col-span-3">
-            <div className="h-full rounded-lg border border-border/50 bg-card/30 backdrop-blur-sm overflow-hidden">
-              {activeTab === 'chat' && <ChatInterface />}
-              {activeTab === 'thoughts' && <ThoughtGraph />}
-              {activeTab === 'memory' && <MemoryPanel />}
-              {activeTab === 'settings' && <SettingsPanel />}
+          {/* Sidebar Footer */}
+          <div className="p-6 border-t border-border/50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-md">
+                  <span className="text-sm font-bold text-white">M</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Active</p>
+                  <p className="text-xs text-text-muted">Online</p>
+                </div>
+              </div>
+              <ThemeToggle />
             </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-600/5 pointer-events-none"></div>
+          <div className="relative z-10 flex-1">
+            {activeTab === 'chat' && <ChatInterface />}
+            {activeTab === 'thoughts' && <ThoughtGraph />}
+            {activeTab === 'memory' && <MemoryPanel />}
+            {activeTab === 'settings' && <SettingsPanel />}
           </div>
         </div>
       </div>

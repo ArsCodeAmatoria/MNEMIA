@@ -45,6 +45,14 @@
 
 ## Core Features
 
+### **Modern UI Experience**
+- **ChatGPT-inspired Design**: Clean, professional interface with light/dark themes
+- **Glass-morphism Effects**: Backdrop blur, transparency, and subtle gradients
+- **Interactive Visualizations**: Real-time neural network and memory exploration
+- **Responsive Layout**: Works beautifully on desktop, tablet, and mobile
+- **Smooth Animations**: Micro-interactions and transitions throughout
+- **Accessibility**: Proper contrast ratios and keyboard navigation
+
 ### **Consciousness Modeling**
 - **6 Modal States**: Awake, Dreaming, Reflecting, Learning, Contemplating, Confused
 - **Quantum Cognition**: Thought superposition, entanglement, and state collapse via PennyLane
@@ -132,11 +140,41 @@ cd ../perception && pip install -r requirements.txt
 ./scripts/dev.sh
 
 # Or individually:
-# Frontend: cd frontend && pnpm dev
-# API: cd api && cargo run  
-# Perception: cd perception && python main.py
-# Core: cd conscious-core && stack run
+# Frontend: cd frontend && pnpm dev    # http://localhost:3002
+# API: cd api && cargo run             # http://localhost:8000  
+# Perception: cd perception && python main.py  # http://localhost:8001
+# Core: cd conscious-core && stack run # http://localhost:8002
 ```
+
+## UI Features
+
+### **Modern Chat Interface**
+- **Bubble Design**: Messages with rounded corners and alternating backgrounds
+- **Avatars**: Color-coded user (purple) and AI (green) gradient avatars  
+- **Real-time Streaming**: Live response generation with animated indicators
+- **Theme Toggle**: Sun/moon icons for instant light/dark mode switching
+- **Message Metadata**: Timestamps and thought pattern indicators
+
+### **Neural Network Visualization**
+- **Interactive Nodes**: Clickable thought nodes with hover tooltips
+- **Dynamic Connections**: Animated lines showing thought relationships
+- **State Indicators**: Visual representation of active, emerging, and dormant thoughts
+- **Intensity Mapping**: Color-coded nodes based on cognitive intensity
+- **Real-time Updates**: Live thought pattern evolution
+
+### **Memory Explorer**
+- **Advanced Search**: Gradient-styled search with semantic filtering
+- **Memory Cards**: Beautiful cards showing episodic, semantic, and procedural memories
+- **Tag System**: Color-coded tags with proper visual hierarchy
+- **Connection Visualization**: Shows memory interconnections and salience
+- **Time-based Organization**: Chronological memory exploration
+
+### **Configuration Panel**
+- **Gradient Sliders**: Custom-styled range inputs with visual progress
+- **Parameter Cards**: Individual cards for each consciousness parameter
+- **Live Preview**: Real-time cognitive state display with color coding
+- **Interactive Controls**: Hover effects and smooth transitions
+- **State Management**: Easy modal state switching with visual feedback
 
 ## API Endpoints
 
@@ -174,10 +212,13 @@ ws.send(JSON.stringify({
 ## Service Architecture
 
 ### Frontend (`frontend/`)
-- **React + Next.js** with Tailwind CSS
-- **Real-time chat** with consciousness indicators
-- **Memory visualization** and exploration interface
-- **Settings panel** for modal states and AI parameters
+- **React + Next.js** with modern artsy UI design
+- **ChatGPT-style interface** with light/dark mode toggle
+- **Glass-morphism effects** with backdrop blur and gradients
+- **Real-time chat** with neural conversation visualization
+- **Memory exploration** with enhanced search and filtering
+- **Interactive settings** with gradient sliders and parameter cards
+- **Thought graph visualization** with 3D neural network display
 
 ### API Gateway (`api/`)
 - **Rust + Axum** for high-performance routing

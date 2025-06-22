@@ -82,121 +82,162 @@ export function MemoryPanel() {
   }
 
   return (
-    <div className="h-full p-6">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Memory Archive</h2>
-        <p className="text-sm text-muted-foreground">
-          Explore the traces of thought and experience
-        </p>
-      </div>
-
-      {/* Search and Filter */}
-      <div className="mb-6 space-y-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Search memories..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-muted/50 border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-quantum-500/50"
-          />
-        </div>
-
-        <div className="flex space-x-2">
-          {['all', 'episodic', 'semantic', 'procedural'].map((type) => (
-            <button
-              key={type}
-              onClick={() => setSelectedType(type)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                selectedType === type
-                  ? 'bg-quantum-500/20 text-quantum-300 border border-quantum-500/30'
-                  : 'bg-muted/50 text-muted-foreground hover:bg-muted'
-              }`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
+    <div className="flex flex-col h-full bg-background/50 backdrop-blur-sm">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-border/30 bg-card/30 backdrop-blur-xl">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <h2 className="text-lg font-semibold text-foreground">Memory Core</h2>
+          </div>
+          <div className="text-sm text-text-muted">
+            {filteredMemories.length} memories
+          </div>
         </div>
       </div>
 
-      {/* Memory List */}
-      <div className="space-y-4 h-[calc(100%-200px)] overflow-y-auto">
-        {filteredMemories.map((memory) => (
-          <div
-            key={memory.id}
-            className="memory-trace p-4 rounded-lg hover:bg-neural-800/20 transition-colors cursor-pointer"
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center space-x-2">
-                <div className={getTypeColor(memory.type)}>
-                  {getTypeIcon(memory.type)}
-                </div>
-                <span className={`text-xs font-medium ${getTypeColor(memory.type)}`}>
-                  {memory.type}
-                </span>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-1">
-                  <Database className="h-3 w-3 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">
-                    {memory.connections}
-                  </span>
-                </div>
-                <div
-                  className={`w-2 h-2 rounded-full`}
-                  style={{
-                    backgroundColor: `rgba(99, 102, 241, ${memory.salience})`,
-                    boxShadow: `0 0 8px rgba(99, 102, 241, ${memory.salience * 0.5})`
-                  }}
+      <div className="flex-1 p-6 overflow-y-auto">
+        <div className="max-w-4xl mx-auto space-y-6">
+          
+          {/* Search and Filter */}
+          <div className="space-y-4">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-purple-600/10 rounded-2xl blur-xl"></div>
+              <div className="relative bg-input/80 backdrop-blur-xl border border-border/50 rounded-2xl shadow-lg">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-muted" />
+                <input
+                  type="text"
+                  placeholder="Search through memories..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-transparent text-foreground placeholder-text-muted focus:outline-none rounded-2xl"
                 />
               </div>
             </div>
 
-            <p className="text-sm leading-relaxed mb-3">
-              {memory.content}
-            </p>
-
-            <div className="flex items-center justify-between">
-              <div className="flex flex-wrap gap-1">
-                {memory.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 bg-neural-700/30 text-xs rounded-full text-muted-foreground"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-              
-              <span className="text-xs text-muted-foreground">
-                {memory.timestamp.toLocaleTimeString()}
-              </span>
+            <div className="flex flex-wrap gap-3">
+              {['all', 'episodic', 'semantic', 'procedural'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setSelectedType(type)}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    selectedType === type
+                      ? 'bg-gradient-to-r from-accent to-purple-600 text-white shadow-lg shadow-accent/25'
+                      : 'bg-card/50 backdrop-blur-xl text-text-muted hover:text-foreground hover:bg-card/70 border border-border/30'
+                  }`}
+                >
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Stats */}
-      <div className="mt-6 grid grid-cols-3 gap-4">
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-blue-400">
-            {memories.filter(m => m.type === 'episodic').length}
+          {/* Memory List */}
+          <div className="space-y-4">
+            {filteredMemories.map((memory) => (
+              <div
+                key={memory.id}
+                className="group p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg hover:shadow-xl hover:bg-card/70 transition-all duration-300 cursor-pointer"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-xl ${
+                      memory.type === 'episodic' ? 'bg-blue-500/20' :
+                      memory.type === 'semantic' ? 'bg-emerald-500/20' : 'bg-purple-500/20'
+                    }`}>
+                      <div className={getTypeColor(memory.type)}>
+                        {getTypeIcon(memory.type)}
+                      </div>
+                    </div>
+                    <div>
+                      <span className={`text-sm font-semibold ${getTypeColor(memory.type)}`}>
+                        {memory.type.charAt(0).toUpperCase() + memory.type.slice(1)}
+                      </span>
+                      <div className="text-xs text-text-muted">
+                        {memory.timestamp.toLocaleString()}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 px-3 py-1 bg-background/50 rounded-lg">
+                      <Database className="h-3 w-3 text-text-muted" />
+                      <span className="text-xs text-text-muted font-medium">
+                        {memory.connections} connections
+                      </span>
+                    </div>
+                    <div
+                      className="w-3 h-3 rounded-full shadow-lg"
+                      style={{
+                        backgroundColor: `rgba(99, 102, 241, ${memory.salience})`,
+                        boxShadow: `0 0 12px rgba(99, 102, 241, ${memory.salience * 0.6})`
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <p className="text-foreground leading-relaxed mb-4 group-hover:text-foreground/90 transition-colors">
+                  {memory.content}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap gap-2">
+                    {memory.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-accent-light/30 text-accent text-xs rounded-full border border-accent/20 font-medium"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="text-xs text-text-muted font-medium">
+                    Salience: {Math.round(memory.salience * 100)}%
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="text-xs text-muted-foreground">Episodic</div>
-        </div>
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-green-400">
-            {memories.filter(m => m.type === 'semantic').length}
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center">
+                  <Clock className="h-4 w-4 text-blue-500" />
+                </div>
+                <div className="text-2xl font-bold text-blue-500">
+                  {memories.filter(m => m.type === 'episodic').length}
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Episodic Memories</div>
+            </div>
+            
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 flex items-center justify-center">
+                  <Database className="h-4 w-4 text-emerald-500" />
+                </div>
+                <div className="text-2xl font-bold text-emerald-500">
+                  {memories.filter(m => m.type === 'semantic').length}
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Semantic Knowledge</div>
+            </div>
+            
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center">
+                  <Tag className="h-4 w-4 text-purple-500" />
+                </div>
+                <div className="text-2xl font-bold text-purple-500">
+                  {memories.filter(m => m.type === 'procedural').length}
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Procedural Skills</div>
+            </div>
           </div>
-          <div className="text-xs text-muted-foreground">Semantic</div>
-        </div>
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-purple-400">
-            {memories.filter(m => m.type === 'procedural').length}
-          </div>
-          <div className="text-xs text-muted-foreground">Procedural</div>
         </div>
       </div>
     </div>

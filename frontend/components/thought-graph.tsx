@@ -93,108 +93,151 @@ export function ThoughtGraph() {
   }
 
   return (
-    <div className="h-full p-6">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Thought Patterns</h2>
-        <p className="text-sm text-muted-foreground">
-          Real-time visualization of MNEMIA's cognitive processes
-        </p>
+    <div className="flex flex-col h-full bg-background/50 backdrop-blur-sm">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-border/30 bg-card/30 backdrop-blur-xl">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+            <h2 className="text-lg font-semibold text-foreground">Neural Network</h2>
+          </div>
+          <div className="text-sm text-text-muted">
+            Real-time thought patterns
+          </div>
+        </div>
       </div>
 
-      <div className="relative h-[400px] bg-neural-900/20 rounded-lg border border-neural-600/30 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full">
-          {/* Connections */}
-          {thoughts.map(thought => 
-            thought.connections.map(connectionId => {
-              const connected = thoughts.find(t => t.id === connectionId)
-              if (!connected) return null
-              
-              return (
-                <line
-                  key={`${thought.id}-${connectionId}`}
-                  x1={`${thought.x}%`}
-                  y1={`${thought.y}%`}
-                  x2={`${connected.x}%`}
-                  y2={`${connected.y}%`}
-                  stroke={getStateColor(thought.state, thought.intensity * 0.5)}
-                  strokeWidth="2"
-                  strokeDasharray={thought.state === 'emerging' ? '5,5' : '0'}
-                  className="transition-all duration-1000"
-                />
-              )
-            })
-          )}
-        </svg>
+      <div className="flex-1 p-6 overflow-y-auto">
+        <div className="max-w-4xl mx-auto space-y-6">
+          
+          {/* Visualization Container */}
+          <div className="relative h-[500px] bg-card/30 backdrop-blur-xl rounded-3xl border border-border/30 shadow-xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-600/5"></div>
+            
+            <svg className="absolute inset-0 w-full h-full">
+              {/* Connections */}
+              {thoughts.map(thought => 
+                thought.connections.map(connectionId => {
+                  const connected = thoughts.find(t => t.id === connectionId)
+                  if (!connected) return null
+                  
+                  return (
+                    <line
+                      key={`${thought.id}-${connectionId}`}
+                      x1={`${thought.x}%`}
+                      y1={`${thought.y}%`}
+                      x2={`${connected.x}%`}
+                      y2={`${connected.y}%`}
+                      stroke={getStateColor(thought.state, thought.intensity * 0.6)}
+                      strokeWidth="3"
+                      strokeDasharray={thought.state === 'emerging' ? '8,4' : '0'}
+                      className="transition-all duration-1000 drop-shadow-sm"
+                    />
+                  )
+                })
+              )}
+            </svg>
 
-        {/* Thought Nodes */}
-        {thoughts.map(thought => (
-          <div
-            key={thought.id}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000"
-            style={{
-              left: `${thought.x}%`,
-              top: `${thought.y}%`,
-            }}
-          >
-            <div
-              className="relative p-3 rounded-full border-2 backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform"
-              style={{
-                backgroundColor: getStateColor(thought.state, 0.2),
-                borderColor: getStateColor(thought.state, 0.8),
-                boxShadow: `0 0 ${thought.intensity * 20}px ${getStateColor(thought.state, 0.5)}`
-              }}
-            >
-              <div className="flex items-center space-x-2">
-                {getStateIcon(thought.state)}
-                <span className="text-xs font-medium whitespace-nowrap">
-                  {thought.content}
-                </span>
+            {/* Thought Nodes */}
+            {thoughts.map(thought => (
+              <div
+                key={thought.id}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000"
+                style={{
+                  left: `${thought.x}%`,
+                  top: `${thought.y}%`,
+                }}
+              >
+                <div className="group">
+                  <div
+                    className="relative p-4 rounded-2xl border-2 backdrop-blur-xl cursor-pointer hover:scale-110 transition-all duration-300 shadow-lg"
+                    style={{
+                      backgroundColor: `${getStateColor(thought.state, 0.15)}`,
+                      borderColor: getStateColor(thought.state, 0.8),
+                      boxShadow: `0 8px 32px ${getStateColor(thought.state, 0.3)}`
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="p-1.5 rounded-lg bg-white/20">
+                        {getStateIcon(thought.state)}
+                      </div>
+                      <span className="text-sm font-medium whitespace-nowrap text-foreground">
+                        {thought.content}
+                      </span>
+                    </div>
+                    
+                    {/* Intensity indicator */}
+                    <div 
+                      className="absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-card shadow-lg"
+                      style={{ backgroundColor: getStateColor(thought.state, thought.intensity) }}
+                    />
+                  </div>
+
+                  {/* Hover tooltip */}
+                  <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-card/90 backdrop-blur-xl px-3 py-1 rounded-lg border border-border/50 shadow-xl">
+                    <div className="text-xs text-text-muted text-center">
+                      Intensity: {Math.round(thought.intensity * 100)}%
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              {/* Intensity indicator */}
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border border-background"
-                style={{ backgroundColor: getStateColor(thought.state, thought.intensity) }}
-              />
+            ))}
+          </div>
+
+          {/* Legend */}
+          <div className="flex flex-wrap gap-6 justify-center">
+            <div className="flex items-center gap-3 px-4 py-2 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30">
+              <div className="w-3 h-3 rounded-full bg-accent shadow-lg"></div>
+              <span className="text-sm font-medium text-foreground">Active</span>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-2 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30">
+              <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-lg"></div>
+              <span className="text-sm font-medium text-foreground">Emerging</span>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-2 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30">
+              <div className="w-3 h-3 rounded-full bg-gray-400 shadow-lg"></div>
+              <span className="text-sm font-medium text-foreground">Dormant</span>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Legend */}
-      <div className="mt-6 flex space-x-6 text-sm">
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 rounded-full bg-quantum-500" />
-          <span>Active</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-          <span>Emerging</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 rounded-full bg-neutral-400" />
-          <span>Dormant</span>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="mt-6 grid grid-cols-3 gap-4">
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-quantum-400">
-            {thoughts.filter(t => t.state === 'active').length}
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center">
+                  <Zap className="h-4 w-4 text-accent" />
+                </div>
+                <div className="text-2xl font-bold text-accent">
+                  {thoughts.filter(t => t.state === 'active').length}
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Active Thoughts</div>
+            </div>
+            
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 flex items-center justify-center">
+                  <Sparkles className="h-4 w-4 text-emerald-500" />
+                </div>
+                <div className="text-2xl font-bold text-emerald-500">
+                  {thoughts.filter(t => t.state === 'emerging').length}
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Emerging Ideas</div>
+            </div>
+            
+            <div className="p-6 bg-card/50 backdrop-blur-xl rounded-2xl border border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center">
+                  <Brain className="h-4 w-4 text-purple-500" />
+                </div>
+                <div className="text-2xl font-bold text-purple-500">
+                  {Math.round(thoughts.reduce((acc, t) => acc + t.intensity, 0) / thoughts.length * 100)}%
+                </div>
+              </div>
+              <div className="text-sm text-text-muted">Avg Intensity</div>
+            </div>
           </div>
-          <div className="text-xs text-muted-foreground">Active Thoughts</div>
-        </div>
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-green-400">
-            {thoughts.filter(t => t.state === 'emerging').length}
-          </div>
-          <div className="text-xs text-muted-foreground">Emerging Ideas</div>
-        </div>
-        <div className="p-3 bg-neural-800/20 rounded-lg border border-neural-600/30">
-          <div className="text-lg font-semibold text-neutral-400">
-            {Math.round(thoughts.reduce((acc, t) => acc + t.intensity, 0) / thoughts.length * 100)}%
-          </div>
-          <div className="text-xs text-muted-foreground">Avg Intensity</div>
         </div>
       </div>
     </div>
