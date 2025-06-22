@@ -52,6 +52,7 @@
 - **ChatGPT-inspired Design**: Clean, professional interface with light/dark themes
 - **Glass-morphism Effects**: Backdrop blur, transparency, and subtle gradients
 - **Interactive Visualizations**: Real-time neural network and memory exploration
+- **Mathematical Expressions**: KaTeX-powered LaTeX rendering for scientific discussions
 - **Responsive Layout**: Works beautifully on desktop, tablet, and mobile
 - **Smooth Animations**: Micro-interactions and transitions throughout
 - **Accessibility**: Proper contrast ratios and keyboard navigation
@@ -227,6 +228,21 @@ cd ../perception && pip install -r requirements.txt
 - **Live Preview**: Real-time cognitive state display with color coding
 - **Interactive Controls**: Hover effects and smooth transitions
 - **State Management**: Easy modal state switching with visual feedback
+
+### **Mathematical Expressions**
+- **KaTeX Rendering**: Beautiful LaTeX math expressions throughout the interface
+- **Inline Math**: Seamless integration like `$E = mc^2$` within conversations
+- **Block Equations**: Standalone formulas with proper spacing and highlighting
+- **Themed Styling**: Quantum (blue), consciousness (green), and neural (orange) math styling
+- **Dark Mode Support**: Math expressions adapt to light/dark themes automatically
+- **Error Handling**: Graceful fallback for invalid LaTeX expressions
+
+**Example Consciousness Math:**
+```
+Quantum superposition: ψ = α|0⟩ + β|1⟩
+Consciousness integral: C = ∫ M(t) · A(t) · I(t) dt  
+Attention mechanism: Attention(Q,K,V) = softmax(QK^T/√d_k)V
+```
 
 ## API Endpoints
 
@@ -437,6 +453,21 @@ We welcome contributions to expand MNEMIA's consciousness capabilities:
 MIT License - See [LICENSE](LICENSE) for details.
 
 ## Latest Updates
+
+### **Mathematical Expression Rendering** *(January 2025)*
+
+MNEMIA now supports beautiful LaTeX mathematical expressions in all conversations:
+
+- **KaTeX Integration**: Seamless rendering of mathematical expressions using LaTeX syntax
+- **Themed Math Styling**: Quantum mechanics (blue), consciousness theory (green), neural networks (orange)
+- **Inline & Block Math**: Support for both `$inline$` and `$$block$$` mathematical expressions  
+- **Dark Mode Compatible**: Math expressions automatically adapt to theme changes
+- **Scientific Discussions**: Perfect for explaining quantum consciousness, neural networks, and information theory
+
+**Example Usage:**
+- Type: "The wave function is $\\psi = \\alpha|0\\rangle + \\beta|1\\rangle$"
+- MNEMIA responds with proper mathematical formatting and quantum-styled highlighting
+- Complex equations render beautifully: `$$C = \\int M(t) \\cdot A(t) \\cdot I(t) \\, dt$$`
 
 ### **Docker Deployment Complete** *(January 2025)*
 
