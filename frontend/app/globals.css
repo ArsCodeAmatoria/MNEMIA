@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'katex/dist/katex.min.css';
 
 @layer base {
   :root {
@@ -117,4 +118,34 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--accent-foreground));
+}
+
+/* KaTeX Math Rendering Styles */
+.katex {
+  font-size: 1.1em;
+  color: hsl(var(--foreground));
+}
+
+.dark .katex {
+  color: hsl(var(--foreground));
+}
+
+.katex .base {
+  color: inherit;
+}
+
+/* Quantum-inspired math highlighting */
+.math-quantum {
+  @apply bg-gradient-to-r from-blue-500/10 to-purple-500/10 
+         border border-blue-500/20 rounded-md px-2 py-1;
+}
+
+.math-consciousness {
+  @apply bg-gradient-to-r from-emerald-500/10 to-teal-500/10 
+         border border-emerald-500/20 rounded-md px-2 py-1;
+}
+
+.math-neural {
+  @apply bg-gradient-to-r from-orange-500/10 to-red-500/10 
+         border border-orange-500/20 rounded-md px-2 py-1;
 } 

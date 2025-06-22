@@ -17,24 +17,30 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Create app user
+# Create app user and cache directory
 RUN groupadd -r app && useradd -r -g app app
+
+# Create cache directories with proper permissions
+RUN mkdir -p /app /home/app/.cache && \
+    chown -R app:app /app /home/app
 
 WORKDIR /app
 
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# Install Python dependencies as app user
+USER app
+RUN pip install --user --upgrade pip && \
+    pip install --user -r requirements.txt
 
 # Copy application code
-COPY . .
+COPY --chown=app:app . .
 
-# Change ownership to app user
-RUN chown -R app:app /app
-USER app
+# Set environment for user installations
+ENV PATH="/home/app/.local/bin:$PATH" \
+    TRANSFORMERS_CACHE="/home/app/.cache/transformers" \
+    HF_HOME="/home/app/.cache/huggingface"
 
 EXPOSE 8001
 
