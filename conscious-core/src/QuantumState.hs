@@ -16,7 +16,6 @@ module QuantumState
   , evolveSuperposition
   ) where
 
-import Data.Aeson (ToJSON, FromJSON)
 import GHC.Generics (Generic)
 import System.Random (Random, randomR, StdGen, mkStdGen)
 import qualified Data.Vector as V
@@ -31,18 +30,12 @@ data Thought = Thought
   , thoughtValence :: Double   -- ^ Emotional charge (-1.0 to 1.0)
   } deriving (Eq, Show, Generic)
 
-instance ToJSON Thought
-instance FromJSON Thought
-
 -- | Quantum-inspired state of multiple thoughts
 data QuantumState = QuantumState
   { qsThoughts :: [WeightedThought]
   , qsCoherence :: Double -- ^ How coherent/stable the superposition is
   , qsEntangled :: [Entanglement]
   } deriving (Eq, Show, Generic)
-
-instance ToJSON QuantumState
-instance FromJSON QuantumState
 
 -- | A thought with quantum probability amplitude
 type WeightedThought = (Thought, Double)
@@ -63,11 +56,6 @@ data EntanglementType
   | Causal      -- ^ Cause-effect relationship
   | Associative -- ^ Free association
   deriving (Eq, Show, Generic)
-
-instance ToJSON Entanglement
-instance ToJSON EntanglementType
-instance FromJSON Entanglement
-instance FromJSON EntanglementType
 
 -- | Create a basic thought
 createThought :: String -> Double -> [String] -> Double -> Thought

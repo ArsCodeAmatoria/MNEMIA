@@ -16,19 +16,13 @@ description:         Please see the README on GitHub at <https://github.com/your
 
 dependencies:
 - base >= 4.7 && < 5
-- aeson
 - text
-- bytestring
 - vector
 - random
 - mtl
 - transformers
 - containers
 - time
-- uuid
-- scientific
-- unordered-containers
-- hashable
 
 library:
   source-dirs: src

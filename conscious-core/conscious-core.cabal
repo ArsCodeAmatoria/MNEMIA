@@ -1,0 +1,85 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.38.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           conscious-core
+version:        0.1.0.0
+synopsis:       Quantum-inspired conscious AI core modeling modal mind states
+description:    Please see the README on GitHub at <https://github.com/your-org/mnemia#readme>
+category:       AI
+homepage:       https://github.com/your-org/mnemia#readme
+bug-reports:    https://github.com/your-org/mnemia/issues
+author:         MNEMIA Project
+maintainer:     your-email@example.com
+copyright:      2024 MNEMIA Project
+license:        MIT
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/your-org/mnemia
+
+library
+  exposed-modules:
+      ModalState
+      MonadMind
+      QuantumMind
+      QuantumState
+  other-modules:
+      Paths_conscious_core
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , mtl
+    , random
+    , text
+    , time
+    , transformers
+    , vector
+  default-language: Haskell2010
+
+executable conscious-core-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_conscious_core
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , conscious-core
+    , containers
+    , mtl
+    , random
+    , text
+    , time
+    , transformers
+    , vector
+  default-language: Haskell2010
+
+test-suite conscious-core-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_conscious_core
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , conscious-core
+    , containers
+    , hspec
+    , mtl
+    , random
+    , text
+    , time
+    , transformers
+    , vector
+  default-language: Haskell2010

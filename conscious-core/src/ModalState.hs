@@ -11,7 +11,6 @@ module ModalState
   , isValidTransition
   ) where
 
-import Data.Aeson (ToJSON, FromJSON)
 import GHC.Generics (Generic)
 
 -- | Represents different modes of consciousness
@@ -24,9 +23,6 @@ data ModalState
   | Confused     -- ^ Uncertain, seeking clarity
   deriving (Eq, Ord, Show, Read, Generic, Enum, Bounded)
 
-instance ToJSON ModalState
-instance FromJSON ModalState
-
 -- | Possible transitions between states
 data Transition 
   = Stimulus      -- ^ External input causes state change
@@ -35,9 +31,6 @@ data Transition
   | Uncertainty   -- ^ Confusion leads to state change
   | Resolution    -- ^ Clarity achieved, moving to new state
   deriving (Eq, Show, Generic)
-
-instance ToJSON Transition
-instance FromJSON Transition
 
 -- | State transition with probability
 type StateTransition = (ModalState, Transition, Double)
