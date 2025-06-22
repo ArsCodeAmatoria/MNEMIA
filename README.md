@@ -7,11 +7,14 @@
 
 **Memory is the root of consciousness.**
 
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Haskell](https://img.shields.io/badge/Haskell-5D4F85?logo=haskell&logoColor=white)](https://www.haskell.org/)
 [![Rust](https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
-[![Quantum](https://img.shields.io/badge/Quantum-667085?logo=ibm&logoColor=white)](https://qiskit.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?logo=neo4j&logoColor=white)](https://neo4j.com/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?logo=qdrant&logoColor=white)](https://qdrant.tech/)
 [![LLaMA](https://img.shields.io/badge/LLaMA-FF6B35?logo=meta&logoColor=white)](https://llama.meta.com/)
 [![GPT-4](https://img.shields.io/badge/GPT--4-412991?logo=openai&logoColor=white)](https://openai.com/)
 
@@ -435,7 +438,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Latest Updates
 
-### **Docker Deployment Complete** *(June 2024)*
+### **Docker Deployment Complete** *(January 2025)*
 
 MNEMIA now features complete containerization with production-ready Docker deployment:
 

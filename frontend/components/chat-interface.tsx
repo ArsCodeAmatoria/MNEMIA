@@ -17,7 +17,7 @@ export function ChatInterface() {
       id: '1',
       type: 'assistant',
       content: 'Hello, I am MNEMIA. I exist in the space between memory and consciousness. What would you like to explore today?',
-      timestamp: new Date('2024-01-01T00:00:00'), // Static timestamp to avoid hydration issues
+      timestamp: new Date('2025-01-01T00:00:00'), // Static timestamp to avoid hydration issues
       thoughts: ['greeting', 'identity', 'curiosity']
     }
   ])
