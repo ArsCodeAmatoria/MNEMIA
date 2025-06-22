@@ -17,25 +17,13 @@ description:         Please see the README on GitHub at <https://github.com/your
 dependencies:
 - base >= 4.7 && < 5
 - text
-- vector
-- random
-- mtl
-- transformers
 - containers
 - time
 - aeson
 - bytestring
-- scientific
-- unordered-containers
-- hashable
-- MonadRandom
-- stm
-- async
-- monad-control
-- transformers-base
-- exceptions
-- lens
-- linear
+- mtl
+- transformers
+- random
 
 library:
   source-dirs: src
@@ -60,5 +48,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - conscious-core
-    - hspec 
+    - conscious-core 
