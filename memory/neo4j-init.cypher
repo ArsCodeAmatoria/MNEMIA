@@ -16,8 +16,8 @@ CREATE INDEX emotion_valence IF NOT EXISTS FOR (e:Emotion) ON (e.valence);
 CREATE INDEX memory_confidence IF NOT EXISTS FOR (m:Memory) ON (m.confidence);
 
 // Create fulltext indexes for semantic search
-CALL db.index.fulltext.createNodeIndex('memory_content', ['Memory'], ['content', 'context']) YIELD name, config;
-CALL db.index.fulltext.createNodeIndex('concept_search', ['Concept'], ['name', 'description']) YIELD name, config;
+CREATE FULLTEXT INDEX memory_content IF NOT EXISTS FOR (m:Memory) ON EACH [m.content, m.context];
+CREATE FULLTEXT INDEX concept_search IF NOT EXISTS FOR (c:Concept) ON EACH [c.name, c.description];
 
 // Initialize core modal states
 MERGE (awake:ModalState {name: 'Awake', id: 'modal_awake'})
