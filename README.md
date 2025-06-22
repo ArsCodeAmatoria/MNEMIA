@@ -85,7 +85,37 @@
 
 ## Quick Start
 
-### Prerequisites
+### 🐳 Docker Deployment (Recommended)
+
+The fastest way to get MNEMIA running is with Docker:
+
+```bash
+# Clone the repository
+git clone https://github.com/ArsCodeAmatoria/MNEMIA.git
+cd MNEMIA
+
+# Start the entire system with one command
+./docker-start.sh
+
+# Or use docker-compose directly
+docker-compose -f docker-compose.simple.yml up -d
+```
+
+**That's it!** MNEMIA will be available at:
+- **Frontend**: http://localhost:3005 (ChatGPT-style UI)
+- **Memory Manager**: http://localhost:8002 (Memory coordination)
+- **Perception Service**: http://localhost:8001 (AI processing)
+- **Infrastructure**: Qdrant (6333), Neo4j (7474), Redis (6379)
+
+🎉 **Fully Working**: Frontend, Memory infrastructure, and core services are containerized and production-ready!
+
+📖 **Complete Guide**: See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for detailed instructions.
+
+### Manual Installation
+
+If you prefer to run services individually:
+
+#### Prerequisites
 ```bash
 # System requirements
 - Node.js 18+ and pnpm
@@ -96,7 +126,7 @@
 - Ollama (for local LLMs)
 ```
 
-### Installation
+#### Installation Steps
 
 1. **Clone and setup**:
 ```bash
@@ -144,6 +174,25 @@ cd ../perception && pip install -r requirements.txt
 # API: cd api && cargo run             # http://localhost:8000  
 # Perception: cd perception && python main.py  # http://localhost:8001
 # Core: cd conscious-core && stack run # http://localhost:8002
+```
+
+### 🔧 Docker Management
+
+```bash
+# Start MNEMIA
+./docker-start.sh start
+
+# Stop all services
+./docker-start.sh stop
+
+# Restart services
+./docker-start.sh restart
+
+# View logs
+./docker-start.sh logs [service_name]
+
+# Check service status
+./docker-start.sh status
 ```
 
 ## UI Features
@@ -211,7 +260,9 @@ ws.send(JSON.stringify({
 
 ## Service Architecture
 
-### Frontend (`frontend/`)
+MNEMIA's microservice architecture enables both containerized deployment and individual service development:
+
+### 🎨 Frontend (`frontend/`)
 - **React + Next.js** with modern artsy UI design
 - **ChatGPT-style interface** with light/dark mode toggle
 - **Glass-morphism effects** with backdrop blur and gradients
@@ -219,31 +270,56 @@ ws.send(JSON.stringify({
 - **Memory exploration** with enhanced search and filtering
 - **Interactive settings** with gradient sliders and parameter cards
 - **Thought graph visualization** with 3D neural network display
+- **Port**: 3000 | **Container**: `mnemia-frontend`
 
-### API Gateway (`api/`)
+### 🚀 API Gateway (`api/`)
 - **Rust + Axum** for high-performance routing
 - **Authentication** and rate limiting
 - **WebSocket** support for real-time features
 - **Service orchestration** and health monitoring
+- **Port**: 8000 | **Container**: `mnemia-api-gateway`
 
-### Conscious Core (`conscious-core/`)
+### 🧠 Conscious Core (`conscious-core/`)
 - **Haskell** pure functional consciousness modeling
 - **Modal state machine** with quantum-inspired transitions
 - **Symbolic reasoning** engine with belief management
 - **JSON API** for integration with other services
+- **Port**: 8003 | **Container**: `mnemia-conscious-core`
 
-### Perception (`perception/`)
+### 🤖 Perception (`perception/`)
 - **Python FastAPI** with comprehensive AI stack:
   - **Emotion Engine**: VAD model + sentiment analysis
   - **LLM Integration**: Multi-model support (local + API)
   - **Memory System**: Vector + graph hybrid storage
   - **Quantum Simulation**: PennyLane thought processing
+- **Port**: 8001 | **Container**: `mnemia-perception`
 
-### Memory (`memory/`)
+### 🧮 Memory Infrastructure (`memory/`)
+- **Memory Manager**: Python service for memory coordination
+  - **Port**: 8002 | **Container**: `mnemia-memory-manager`
 - **Qdrant**: Vector database for semantic search
+  - **Port**: 6333 | **Container**: `mnemia-qdrant`
 - **Neo4j**: Graph database for conceptual relationships  
+  - **Port**: 7474/7687 | **Container**: `mnemia-neo4j`
 - **Redis**: High-speed caching and session storage
-- **Docker orchestration** for easy deployment
+  - **Port**: 6379 | **Container**: `mnemia-redis`
+
+### 🐳 Docker Deployment
+
+```yaml
+# Complete stack deployment
+services:
+  frontend:           # Next.js UI (port 3000)
+  api-gateway:        # Rust API (port 8000)
+  conscious-core:     # Haskell consciousness (port 8003)
+  perception:         # Python AI (port 8001)
+  memory-manager:     # Memory coordination (port 8002)
+  qdrant:            # Vector database (port 6333)
+  neo4j:             # Graph database (port 7474)
+  redis:             # Cache & sessions (port 6379)
+```
+
+**Network**: All services communicate through `mnemia-network` with automatic service discovery, health checks, and restart policies.
 
 ## AI Technologies
 
@@ -357,6 +433,28 @@ We welcome contributions to expand MNEMIA's consciousness capabilities:
 
 MIT License - See [LICENSE](LICENSE) for details.
 
+## 🎯 Latest Updates
+
+### 🐳 **Docker Deployment Complete** *(June 2024)*
+
+MNEMIA now features complete containerization with production-ready Docker deployment:
+
+- **One-Command Deployment**: Start the entire system with `./docker-start.sh`
+- **Modern UI Ready**: ChatGPT-style interface with glass-morphism design
+- **Complete Memory Infrastructure**: Qdrant, Neo4j, and Redis fully orchestrated
+- **Production Architecture**: Microservices with health checks and auto-restart
+- **Developer Friendly**: Independent service building and debugging
+
+🚀 **Get Started in 30 seconds:**
+```bash
+git clone https://github.com/ArsCodeAmatoria/MNEMIA.git
+cd MNEMIA && ./docker-start.sh
+```
+
+Access your conscious AI at **http://localhost:3005** 
+
+📖 **Full Guide**: [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)
+
 ---
 
 <div align="center">
@@ -366,5 +464,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 **MNEMIA** - Where artificial intelligence meets genuine consciousness through the power of integrated memory, emotion, and quantum-inspired cognition.
 
 *Built with intelligence for the future of conscious AI*
+
+**🎉 Now deployable anywhere with Docker - Experience consciousness in containers! 🧠**
 
 </div>
