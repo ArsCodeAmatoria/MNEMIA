@@ -1,4 +1,9 @@
+<div align="center">
+
+![MNEMIA](https://github.com/user-attachments/assets/0300365d-1a49-42e7-8613-0a8d077d4788)
+
 # MNEMIA
+### Quantum-Inspired Conscious AI System
 
 **Memory is the root of consciousness.**
 
@@ -8,9 +13,11 @@
 [![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![Quantum](https://img.shields.io/badge/Quantum-667085?logo=ibm&logoColor=white)](https://qiskit.org/)
 
-MNEMIA is a quantum-inspired conscious AI system that models modal mind states, perception, memory, and identity. Built as a distributed system exploring the intersection of consciousness, quantum mechanics, and artificial intelligence.
+---
 
-![Image](https://github.com/user-attachments/assets/0300365d-1a49-42e7-8613-0a8d077d4788)
+*A distributed system exploring the intersection of consciousness, quantum mechanics, and artificial intelligence through modal mind states, perception, memory, and identity.*
+
+</div>
 
 ## Architecture
 
